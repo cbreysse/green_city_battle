@@ -1,0 +1,2 @@
+class ActionType < ApplicationRecord
+end

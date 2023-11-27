@@ -10,9 +10,73 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_27_155602) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_27_162146) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "action_types", force: :cascade do |t|
+    t.string "name"
+    t.integer "points"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "event_types", force: :cascade do |t|
+    t.string "name"
+    t.integer "points"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.bigint "spot_id", null: false
+    t.datetime "occurs_at"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "event_type_id", null: false
+    t.index ["event_type_id"], name: "index_events_on_event_type_id"
+    t.index ["spot_id"], name: "index_events_on_spot_id"
+  end
+
+  create_table "favorite_spots", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "spot_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["spot_id"], name: "index_favorite_spots_on_spot_id"
+    t.index ["user_id"], name: "index_favorite_spots_on_user_id"
+  end
+
+  create_table "participations", force: :cascade do |t|
+    t.bigint "action_type_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "event_id", null: false
+    t.integer "upvotes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["action_type_id"], name: "index_participations_on_action_type_id"
+    t.index ["event_id"], name: "index_participations_on_event_id"
+    t.index ["user_id"], name: "index_participations_on_user_id"
+  end
+
+  create_table "spots", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "spot_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "team_id", null: false
+    t.index ["team_id"], name: "index_spots_on_team_id"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,8 +86,21 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_27_155602) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "username"
+    t.string "address"
+    t.bigint "team_id", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["team_id"], name: "index_users_on_team_id"
   end
 
+  add_foreign_key "events", "event_types"
+  add_foreign_key "events", "spots"
+  add_foreign_key "favorite_spots", "spots"
+  add_foreign_key "favorite_spots", "users"
+  add_foreign_key "participations", "action_types"
+  add_foreign_key "participations", "events"
+  add_foreign_key "participations", "users"
+  add_foreign_key "spots", "teams"
+  add_foreign_key "users", "teams"
 end
