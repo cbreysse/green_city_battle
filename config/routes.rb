@@ -15,4 +15,5 @@ Rails.application.routes.draw do
     resources :events, only: [:create]
   end
   resources :participations, only: [:show]
+  resources :events, only: [:show]
 end
