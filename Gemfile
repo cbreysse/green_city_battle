@@ -53,6 +53,7 @@ gem "sassc-rails"
 
 # Seed helper
 gem "faker"
+gem "geocoder"
 
 group :development, :test do
   gem "dotenv-rails"
