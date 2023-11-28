@@ -1,9 +1,17 @@
 <div class="navbar fixed-bottom navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
-    <%= link_to "map", root_path %>
-    <%= link_to "favourites", "/" %>
+    <%= link_to root_path do %>
+      <i class="fa-solid fa-map-location-dot"></i>
+    <% end %>
+    <%= link_to "/" do %>
+      <i class="fa-solid fa-heart"></i>
+    <% end %>
     <%= link_to "+", "/" %>
-    <%= link_to "team", "/" %>
-    <%= link_to "profile", "/" %>
+    <%= link_to "/" do %>
+      <i class="fa-solid fa-users"></i>
+    <% end %>
+    <%= link_to "/" do %>
+      <i class="fa-solid fa-gear"></i>
+    <% end %>
   </div>
 </div>
