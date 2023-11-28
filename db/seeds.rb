@@ -4,6 +4,7 @@ require 'json'
 puts "Cleaning db..."
 User.destroy_all
 Team.destroy_all
+Spot.destroy_all
 
 # puts "Creating teams... "
 
@@ -40,10 +41,12 @@ document = File.read(filepath)
 response = JSON.parse(document)
 spots = response["features"]
 spots.each do |spot|
-  Spot.create(
+  Spot.create!(
     name: spot["properties"]["Name"],
     latitude: spot["properties"]["Lat"],
     longitude: spot["properties"]["Lon"],
-    spot_type: spot["properties"]["Type_de_V__g__talisation"]
+    spot_type: spot["properties"]["Type_de_V__g__talisation"],
+    team_id: team1.id
   )
+  p spots
 end
