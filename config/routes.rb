@@ -12,5 +12,6 @@ Rails.application.routes.draw do
 
   resources :spots, only: %i[index show new create] do
     resources :participations, only: %i[new create]
+    resources :events, only: [:create]
   end
 end
