@@ -16,43 +16,35 @@ export default class extends Controller {
       style: "mapbox://styles/kailaulau/clp9syl68003m01o01p266rin"
     })
 
-    this.#geolocateUser()
-    // add user marker to map
+    // wait a bit before jumping to user's location to avoid screen glitching
+    setTimeout(this.#geolocateUser, 300);
   }
 
   #geolocateUser = () => {
-    console.log("Checking geolocation availability...")
     if (!navigator.geolocation) {
       console.log("Geolocation is not supported in this browser.")
+      // TODO: show an alert to the user
     } else {
-      console.log("Geolocation is supported!")
-      console.log("Geolocating user...")
-      navigator.geolocation.getCurrentPosition(this.#success.bind(this), this.#error.bind(this))
+      const geolocOptions = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+      }
+      navigator.geolocation.getCurrentPosition(this.#centerMapOnUser, this.#handleGeolocError, geolocOptions)
     }
   }
 
-  #success = (position) => {
-    console.log("Geolocation successful!")
-    console.log(`Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`)
-    this.#addUserMarkerToMap(position.coords)
+  #centerMapOnUser = (data) => {
+    new mapboxgl.Marker()
+          .setLngLat([data.coords.longitude, data.coords.latitude])
+          .addTo(this.map)
+        const bounds = new mapboxgl.LngLatBounds()
+        bounds.extend([ data.coords.longitude, data.coords.latitude ])
+        this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 1500 })
   }
 
-  #error = () => {
-    console.log("Unable to get your location.")
-  }
-
-  #addUserMarkerToMap = (coords) => {
-    const userMarker = new mapboxgl.Marker()
-      .setLngLat([ coords.longitude, coords.latitude ])
-      .addTo(this.map)
-    this.markersValue.push(userMarker)
-    // TODO: get the map to center on user marker
-    this.#fitMapToMarkers()
-  }
-
-  #fitMapToMarkers() {
-    const bounds = new mapboxgl.LngLatBounds()
-    this.markersValue.forEach(marker => bounds.extend([ marker.lng, marker.lat ]))
-    this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 15 })
+  #handleGeolocError = (error) => {
+    console.log(error)
+    // TODO: show an alert to the user
   }
 }
