@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   end
   resources :participations, only: [:show]
   resources :events, only: [:show]
+  resources :teams, only: [:show]
 end
