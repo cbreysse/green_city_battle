@@ -14,4 +14,5 @@ Rails.application.routes.draw do
     resources :participations, only: %i[new create]
     resources :events, only: [:create]
   end
+  resources :participations, only: [:show]
 end
