@@ -22,6 +22,10 @@ export default class extends Controller {
     this.#addMarkersToMap()
   }
 
+  showSpotDetails(event) {
+    // TODO: show the spot details
+  }
+
   #geolocateUser = () => {
     if (!navigator.geolocation) {
       console.log("Geolocation is not supported in this browser.")
@@ -54,9 +58,11 @@ export default class extends Controller {
 
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
-      new mapboxgl.Marker()
+      const newMarker = new mapboxgl.Marker()
         .setLngLat([ marker.lng, marker.lat ])
         .addTo(this.map)
+
+      newMarker.getElement().setAttribute('data-action', 'click->map#showSpotDetails')
     })
   }
 }

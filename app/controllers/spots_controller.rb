@@ -5,7 +5,8 @@ class SpotsController < ApplicationController
     @markers = Spot.geocoded.map do |spot|
       {
         lat: spot.latitude,
-        lng: spot.longitude
+        lng: spot.longitude,
+        name: spot.name
       }
     end
     @user_marker = render_to_string(partial: "spots/user_marker")
