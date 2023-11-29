@@ -25,8 +25,12 @@ export default class extends Controller {
   }
 
   showSpotDetails(event) {
-    console.log('click')
     this.spotDetailsTarget.classList.add('show')
+    const { name, address, id } = event.currentTarget.dataset
+    const spot = { name, address, id }
+    Object.entries(spot).forEach(([key, value]) => {
+      this.spotDetailsTarget.setAttribute(`data-spot-details-${key}-value`, value)
+    })
   }
 
   #geolocateUser = () => {
@@ -65,7 +69,11 @@ export default class extends Controller {
         .setLngLat([ marker.lng, marker.lat ])
         .addTo(this.map)
 
-      newMarker.getElement().setAttribute('data-action', 'click->map#showSpotDetails')
+      const markerHtml = newMarker.getElement()
+      markerHtml.setAttribute('data-action', 'click->map#showSpotDetails')
+      Object.entries(marker.spot).forEach(([key, value]) => {
+        markerHtml.setAttribute(`data-${key}`, value)
+      })
     })
   }
 }

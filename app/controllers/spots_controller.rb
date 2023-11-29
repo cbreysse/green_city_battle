@@ -6,7 +6,7 @@ class SpotsController < ApplicationController
       {
         lat: spot.latitude,
         lng: spot.longitude,
-        name: spot.name
+        spot: { id: spot.id, name: spot.name, address: spot.address }
       }
     end
     @user_marker = render_to_string(partial: "spots/user_marker")
