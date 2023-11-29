@@ -5,7 +5,8 @@ import mapboxgl from 'mapbox-gl'
 export default class extends Controller {
   static values = {
     apiKey: String,
-    markers: Array
+    markers: Array,
+    userMarker: String
   }
 
   connect() {
@@ -17,7 +18,8 @@ export default class extends Controller {
     })
 
     // wait a bit before jumping to user's location to avoid screen glitching
-    setTimeout(this.#geolocateUser, 300);
+    setTimeout(this.#geolocateUser, 300)
+    this.#addMarkersToMap()
   }
 
   #geolocateUser = () => {
@@ -35,7 +37,9 @@ export default class extends Controller {
   }
 
   #centerMapOnUser = (data) => {
-    new mapboxgl.Marker()
+    const userMarker = document.createElement('div')
+    userMarker.innerHTML = this.userMarkerValue
+    new mapboxgl.Marker(userMarker)
           .setLngLat([data.coords.longitude, data.coords.latitude])
           .addTo(this.map)
         const bounds = new mapboxgl.LngLatBounds()
@@ -46,5 +50,13 @@ export default class extends Controller {
   #handleGeolocError = (error) => {
     console.log(error)
     // TODO: show an alert to the user
+  }
+
+  #addMarkersToMap() {
+    this.markersValue.forEach((marker) => {
+      new mapboxgl.Marker()
+        .setLngLat([ marker.lng, marker.lat ])
+        .addTo(this.map)
+    })
   }
 }
