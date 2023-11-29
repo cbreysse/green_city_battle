@@ -49,7 +49,8 @@ spots_data.each do |spot_data|
     latitude: spot_data["properties"]["Lat"],
     longitude: spot_data["properties"]["Lon"],
     spot_type: spot_data["properties"]["Type_de_V__g__talisation"],
-    team_id: random_team
+    team_id: random_team,
+    is_open: true
   )
 end
 
