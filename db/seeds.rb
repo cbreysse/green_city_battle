@@ -1,6 +1,3 @@
-require 'faker'
-require 'json'
-
 puts "Cleaning db..."
 User.destroy_all
 Team.destroy_all
