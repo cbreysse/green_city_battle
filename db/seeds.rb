@@ -45,7 +45,6 @@ spots_data.each do |spot_data|
   random_team = teams.sample.id
   p Spot.create!(
     name: spot_data["properties"]["Name"],
-    address: spot_data["properties"]["Arrondissement"],
     latitude: spot_data["properties"]["Lat"],
     longitude: spot_data["properties"]["Lon"],
     spot_type: spot_data["properties"]["Type_de_V__g__talisation"],
