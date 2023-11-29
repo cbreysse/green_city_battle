@@ -9,17 +9,28 @@ export default class extends Controller {
     userMarker: String
   }
 
+  static targets = [ "map", "spotDetails" ]
+
   connect() {
     mapboxgl.accessToken = this.apiKeyValue
 
     this.map = new mapboxgl.Map({
-      container: this.element,
+      container: this.mapTarget,
       style: "mapbox://styles/kailaulau/clp9syl68003m01o01p266rin"
     })
 
     // wait a bit before jumping to user's location to avoid screen glitching
     setTimeout(this.#geolocateUser, 300)
     this.#addMarkersToMap()
+  }
+
+  showSpotDetails(event) {
+    this.spotDetailsTarget.classList.add('show')
+    const { name, address, id } = event.currentTarget.dataset
+    const spot = { name, address, id }
+    Object.entries(spot).forEach(([key, value]) => {
+      this.spotDetailsTarget.setAttribute(`data-spot-details-${key}-value`, value)
+    })
   }
 
   #geolocateUser = () => {
@@ -54,9 +65,15 @@ export default class extends Controller {
 
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
-      new mapboxgl.Marker()
+      const newMarker = new mapboxgl.Marker()
         .setLngLat([ marker.lng, marker.lat ])
         .addTo(this.map)
+
+      const markerHtml = newMarker.getElement()
+      markerHtml.setAttribute('data-action', 'click->map#showSpotDetails')
+      Object.entries(marker.spot).forEach(([key, value]) => {
+        markerHtml.setAttribute(`data-${key}`, value)
+      })
     })
   }
 }
