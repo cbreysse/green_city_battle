@@ -39,14 +39,15 @@ teams = [team1, team2, team3]
 filepath = "db/Cartographie_des_Jardins_de_rue_au_1er_janvier_2022.geojson"
 document = File.read(filepath)
 response = JSON.parse(document)
-spots = response["features"]
-spots.each do |spot|
+spots_data = response["features"]
+
+spots_data.each do |spot_data|
+  random_team = teams.sample.id
   Spot.create!(
-    name: spot["properties"]["Name"],
-    latitude: spot["properties"]["Lat"],
-    longitude: spot["properties"]["Lon"],
-    spot_type: spot["properties"]["Type_de_V__g__talisation"],
-    team_id: team1.id
+    name: spot_data["properties"]["Name"],
+    latitude: spot_data["properties"]["Lat"],
+    longitude: spot_data["properties"]["Lon"],
+    spot_type: spot_data["properties"]["Type_de_V__g__talisation"],
+    team_id: random_team
   )
-  p spots
 end
