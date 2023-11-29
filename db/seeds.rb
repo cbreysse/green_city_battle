@@ -43,7 +43,7 @@ spots_data = response["features"]
 
 spots_data.each do |spot_data|
   random_team = teams.sample.id
-  Spot.create!(
+  p Spot.create!(
     name: spot_data["properties"]["Name"],
     latitude: spot_data["properties"]["Lat"],
     longitude: spot_data["properties"]["Lon"],
