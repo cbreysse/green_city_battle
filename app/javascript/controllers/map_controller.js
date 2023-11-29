@@ -9,11 +9,13 @@ export default class extends Controller {
     userMarker: String
   }
 
+  static targets = [ "map", "spotDetails" ]
+
   connect() {
     mapboxgl.accessToken = this.apiKeyValue
 
     this.map = new mapboxgl.Map({
-      container: this.element,
+      container: this.mapTarget,
       style: "mapbox://styles/kailaulau/clp9syl68003m01o01p266rin"
     })
 
@@ -23,7 +25,8 @@ export default class extends Controller {
   }
 
   showSpotDetails(event) {
-    // TODO: show the spot details
+    console.log('click')
+    this.spotDetailsTarget.classList.add('show')
   }
 
   #geolocateUser = () => {

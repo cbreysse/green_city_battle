@@ -1,5 +1,13 @@
-<div style="width: 100%; height: 100vh;"
-  data-controller="map"
+<div data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
   data-map-user-marker-value='<%= @user_marker %>'
-  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+  <div data-map-target="map" style="width: 100%; height: 100vh;"></div>
+
+  <div data-controller="spot-details" data-map-target="spotDetails" id="spot-details" class="overlay">
+    <button data-action="click->spot-details#closeOverlay">x</button>
+    <h2>This is the Spot name</h2>
+    <p>This the Spot details</p>
+  </div>
+
+</div>
