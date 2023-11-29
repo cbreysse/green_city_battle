@@ -5,7 +5,7 @@
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
   <div data-map-target="map" style="width: 100%; height: 100vh;"></div>
 
-  <div
+  <%# <div
     data-controller="spot-details"
     data-map-target="spotDetails"
     class="overlay"
@@ -15,5 +15,6 @@
     </div>
     <h2 data-spot-details-target="title"></h2>
     <p data-spot-details-target="address"></p>
-  </div>
+  </div> %>
+  <%= render "spot_details", spot: @test_spot %>
 </div>

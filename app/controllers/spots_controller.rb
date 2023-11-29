@@ -10,5 +10,7 @@ class SpotsController < ApplicationController
       }
     end
     @user_marker = render_to_string(partial: "spots/user_marker")
+    @test_spot = Spot.first
+    @test_spot.address = @test_spot.address.split(',').first(2).join(',').gsub(',', '')
   end
 end

@@ -1,0 +1,8 @@
+<div class="overlay show" data-controller="spot-details">
+  <div class="d-flex justify-content-end w-100">
+    <button class="btn-close" data-action="click->spot-details#closeOverlay"></button>
+  </div>
+  <h2><%= spot.address %></h2>
+  <%= image_tag "spot_default.jpeg", width: "120%", height: 160 %>
+  <%= render "spot_actions" %>
+</div>
