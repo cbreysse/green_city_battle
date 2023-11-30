@@ -5,6 +5,9 @@ class ParticipationsController < ApplicationController
     @spot_action = params[:spot_action]
   end
 
-  def create
+  def create; end
+
+  def show
+    @participation = Participation.find(params[:id])
   end
 end
