@@ -1,8 +1,10 @@
-<h1><%= @spot.name %></h1>
-<%= form_with(model: @participation, local: true, url: root_path) do |form| %>
-  <!-- Your existing form fields here -->
-
-  <%= form.file_field :photo, accept: "image/*", capture: "camera" %>
-
-  <%= form.submit %>
-<% end %>
+<div class="container action-new mt-5">
+  <h1 class="pt-5">Prends une photo pour confirmer ton action !</h1>
+  <div class="container my-5 text-center" data-controller="photo">
+    <%= form_with(model: @participation, local: true, url: root_path) do |form| %>
+      <%= form.label :photo, "Prends une photo !", class: "button-form" %>
+      <%= form.file_field :photo, accept: "image/*", capture: "camera", class: "input-form", data: { action: "change->photo#displayPhoto"} %>
+      <%= form.submit "Confirmer", class: "w-100 py-2 input-form" %>
+    <% end %>
+  </div>
+</div>
