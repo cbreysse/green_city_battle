@@ -52,7 +52,7 @@ document = File.read(filepath)
 response = JSON.parse(document)
 spots_data = response["features"]
 
-spots_data.each do |spot_data|
+spots_data.first(10).each do |spot_data|
   random_team = teams.sample.id
   p Spot.create!(
     name: spot_data["properties"]["Name"],
