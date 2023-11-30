@@ -16,23 +16,26 @@
   height: 2rem;
 }
 
-.btn-green {
-  background-color: rgb(80, 173, 49);
-  width: 4rem;
-  height:4rem;
-  box-shadow: inset 58px 21px 58px 67px rgba(76,1,141,0.79);
+.square-btn {
+  width: 4rem; /* Ajustez la largeur selon vos besoins */
+  height: 4rem; /* Ajustez la hauteur selon vos besoins */
+  background-color: #4CAF50; /* Couleur verte */
+  border: none;
+  border-radius: 15px; /* Ajustez la valeur pour obtenir des coins plus ou moins arrondis */
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5), 0 2px 5px rgba(0, 0, 0, 0.3); /* Ombre intérieure et effet de relief */
+  position: relative;
 }
 
-.square-btn {
-  border-radius: 1.5rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+.square-btn:hover {
+  transform: translateY(-2px); /* Ajustez la valeur pour obtenir l'effet de relief au survol */
 }
 
 .plus-sign {
-  font-size: 3.5rem;
+  font-size: 4rem;
   color: #fff;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  /* Autres styles personnalisés ici */
 }
