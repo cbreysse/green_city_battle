@@ -10,7 +10,12 @@ class SpotsController < ApplicationController
       }
     end
     @user_marker = render_to_string(partial: "spots/user_marker")
-    @test_spot = Spot.first
-    @test_spot.address = @test_spot.address.split(',').first(2).join(',').gsub(',', '')
+  end
+
+  def show
+    @spot = Spot.find(params[:id])
+    respond_to do |format|
+      format.text { render(partial: "spots/spot_details", locals: { spot: @spot }, formats: [:html]) }
+    end
   end
 end

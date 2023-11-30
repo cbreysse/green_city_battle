@@ -1,18 +1,26 @@
 <div class="container mt-4">
   <div class="row mb-3">
     <div class="col-6">
-      <%= render "shared/badge", { badge_img: "plant_watering", badge_text: "Arroser" } %>
+      <%= link_to "action_path (replace with actual path)" do %>
+        <%= render "shared/badge", { badge_img: "plant_watering", badge_text: "Arroser" } %>
+      <% end %>
     </div>
     <div class="col-6">
-      <%= render "shared/badge", { badge_img: "planting", badge_text: "Planter" } %>
+      <%= link_to "action_path (replace with actual path)" do %>
+        <%= render "shared/badge", { badge_img: "planting", badge_text: "Planter" } %>
+      <% end %>
     </div>
   </div>
   <div class="row">
     <div class="col-6">
-      <%= render "shared/badge", { badge_img: "plant_caring", badge_text: "Entretenir" } %>
+      <%= link_to "action_path (replace with actual path)" do %>
+        <%= render "shared/badge", { badge_img: "plant_caring", badge_text: "Entretenir" } %>
+      <% end %>
     </div>
     <div class="col-6">
-      <%= render "shared/badge", { badge_img: "plant_dying", badge_text: "Aïe, c'est mort !" } %>
+      <%= link_to "action_path (replace with actual path)" do %>
+        <%= render "shared/badge", { badge_img: "plant_dying", badge_text: "Aïe, c'est mort !" } %>
+      <% end %>
     </div>
   </div>
 </div>
