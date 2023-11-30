@@ -1,5 +1,5 @@
 class ParticipationsController < ApplicationController
   def show
-    @participation = Participations.find(params[:id])
+    @participation = Participation.find(params[:id])
   end
 end
