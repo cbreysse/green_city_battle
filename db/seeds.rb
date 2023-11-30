@@ -1,9 +1,11 @@
 puts "Cleaning db..."
+Participation.destroy_all
+ActionType.destroy_all
 User.destroy_all
 Team.destroy_all
 Spot.destroy_all
 
-# puts "Creating teams... "
+puts "Creating teams... "
 
 team1 = Team.create!(name: Faker::Team.name)
 team2 = Team.create!(name: Faker::Team.name)
@@ -29,9 +31,9 @@ end
 
 puts "Users have been created!"
 
-# puts "Users have been assigned to teams!"
+puts "Users have been assigned to teams!"
 
-# teams.each { |t| puts "#{t.name} has #{t.users.size}" }
+teams.each { |t| puts "#{t.name} has #{t.users.size}" }
 
 puts "Creating actions..."
 
@@ -43,39 +45,36 @@ p actions = [action1, action2, action3]
 
 puts "Actions created!"
 
+puts "Creating spots..."
+
+filepath = "db/Cartographie_des_Jardins_de_rue_au_1er_janvier_2022.geojson"
+document = File.read(filepath)
+response = JSON.parse(document)
+spots_data = response["features"]
+
+spots_data.each do |spot_data|
+  random_team = teams.sample.id
+  p Spot.create!(
+    name: spot_data["properties"]["Name"],
+    latitude: spot_data["properties"]["Lat"],
+    longitude: spot_data["properties"]["Lon"],
+    spot_type: spot_data["properties"]["Type_de_V__g__talisation"],
+    team_id: random_team,
+    is_open: true
+  )
+end
+
 puts "Creating participations to actions... "
 
-user_id = User.pluck(:id).sample
-action_type_ids = ActionType.pluck(:id)
-
-action_type_ids.each do |action_type_id|
-  Participation.create!(
-    action_type_id: action_type_id,
-    user_id: user_id,
-    event_id: 1,
-    upvotes: rand(1..10)
+10.times do
+  p Participation.create!(
+    action_type_id: ActionType.pluck(:id).sample,
+    user_id: User.pluck(:id).sample,
+    upvotes: rand(1..10),
+    spot_id: Spot.pluck(:id).sample
   )
 end
 
 puts "Participations created!"
-
-# puts "Creating spots..."
-
-# filepath = "db/Cartographie_des_Jardins_de_rue_au_1er_janvier_2022.geojson"
-# document = File.read(filepath)
-# response = JSON.parse(document)
-# spots_data = response["features"]
-
-# spots_data.each do |spot_data|
-#   random_team = teams.sample.id
-#   p Spot.create!(
-#     name: spot_data["properties"]["Name"],
-#     latitude: spot_data["properties"]["Lat"],
-#     longitude: spot_data["properties"]["Lon"],
-#     spot_type: spot_data["properties"]["Type_de_V__g__talisation"],
-#     team_id: random_team,
-#     is_open: true
-#   )
-# end
 
 puts "Finished!"
