@@ -9,7 +9,7 @@ export default class extends Controller {
     userMarker: String
   }
 
-  static targets = [ "map", "spotDetails" ]
+  static targets = ["map", "spotDetails", "spotDetailsContent"]
 
   connect() {
     mapboxgl.accessToken = this.apiKeyValue
@@ -25,12 +25,20 @@ export default class extends Controller {
   }
 
   showSpotDetails(event) {
-    this.spotDetailsTarget.classList.add('show')
-    const { name, address, id } = event.currentTarget.dataset
-    const spot = { name, address, id }
-    Object.entries(spot).forEach(([key, value]) => {
-      this.spotDetailsTarget.setAttribute(`data-spot-details-${key}-value`, value)
-    })
+    const { id } = event.currentTarget.dataset
+    fetch(`/spots/${id}`, {
+      headers: {
+        accepts: "text/html"
+      }
+    }).then(response => response.text())
+      .then(this.#setSpotDetails)
+  }
+
+  #setSpotDetails = (html) => {
+    this.spotDetailsTarget.innerHTML = html
+    setTimeout(() => {
+      this.spotDetailsContentTarget.classList.add('show')
+    }, 100);
   }
 
   #geolocateUser = () => {
@@ -71,9 +79,7 @@ export default class extends Controller {
 
       const markerHtml = newMarker.getElement()
       markerHtml.setAttribute('data-action', 'click->map#showSpotDetails')
-      Object.entries(marker.spot).forEach(([key, value]) => {
-        markerHtml.setAttribute(`data-${key}`, value)
-      })
+      markerHtml.setAttribute(`data-id`, marker.spot.id)
     })
   }
 }
