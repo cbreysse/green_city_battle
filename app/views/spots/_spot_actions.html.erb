@@ -2,24 +2,24 @@
   <div class="row mb-3">
     <div class="col-6">
       <%= link_to new_spot_participation_path(params[:id], action_type: ActionType.find_by(name: "water spot").id) do %>
-        <%= render "shared/badge", { badge_img: "plant_watering", badge_text: "Arroser" } %>
+        <%= render "shared/badge", { badge_img: "plant_watering.png", badge_text: "Arroser" } %>
       <% end %>
     </div>
     <div class="col-6">
-      <%= link_to "action_path (replace with actual path)" do %>
-        <%= render "shared/badge", { badge_img: "planting", badge_text: "Planter" } %>
+      <%= link_to new_spot_participation_path(params[:id], action_type: ActionType.find_by(name: "plant").id) do %>
+        <%= render "shared/badge", { badge_img: "planting.png", badge_text: "Planter" } %>
       <% end %>
     </div>
   </div>
   <div class="row">
     <div class="col-6">
-      <%= link_to "action_path (replace with actual path)" do %>
-        <%= render "shared/badge", { badge_img: "plant_caring", badge_text: "Entretenir" } %>
+      <%= link_to new_spot_participation_path(params[:id], action_type: ActionType.find_by(name: "care").id) do %>
+        <%= render "shared/badge", { badge_img: "plant_caring.png", badge_text: "Entretenir" } %>
       <% end %>
     </div>
     <div class="col-6">
-      <%= link_to "action_path (replace with actual path)" do %>
-        <%= render "shared/badge", { badge_img: "plant_dying", badge_text: "Aïe, c'est mort !" } %>
+      <%= link_to new_spot_participation_path(params[:id], action_type: ActionType.find_by(name: "denounce").id) do %>
+        <%= render "shared/badge", { badge_img: "plant_dying.png", badge_text: "Aïe, c'est mort !" } %>
       <% end %>
     </div>
   </div>
