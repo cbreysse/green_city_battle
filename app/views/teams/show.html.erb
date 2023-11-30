@@ -1,41 +1,32 @@
 <div class="container mt-4">
   <h2 class="mt-4 p-3 text-center"><%= @team.name %></h2>
-<p class="m-3">***************************************************</p>
+  <p class="my-3 text-center">**********************************************</p>
   <div class="row">
-    <div class="col-md-12 text-center">
+    <div class="col-12 text-center">
       <h4>Général</h4>
-        <div class= "d-flex align-item-center">
+        <div class= "d-flex justify-content-center align-item-baseline">
           <%= image_tag 'user_marker', height: 60, width: 60, alt: "user marker" %>
-          <h6 class="m-3"> '1500pts   +30pts'</h6>
+          <h6 class="my-3"> '1500pts   +30pts'</h6>
         </div>
     </div>
   </div>
-<p class="m-3">***************************************************</p>
+  <p class="my-3 text-center">**********************************************</p>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-12">
       <div class="p-3">
         <h5 class="mt-4 text-center">Détails</h5>
-            <div class="d-flex align-items-center">
-              <div class="m-3">
-                <%= image_tag 'plant', height: 60, width: 60, alt: "plant" %>
-                <%= 'Xpts' %>
-              </div>
-              <div class="m-3">
-                <%= image_tag 'plant_dying', height: 60, width: 60, alt: "plant dying" %>
-                <%= 'Xpts' %>
-              </div>
-              <div class="m-3">
-                <%= image_tag 'raid', height: 60, width: 60, alt: "raid" %>
-                <%= 'Xpts' %>
-              </div>
-            </div>
-          </div>
+        <div class="d-flex justify-content-center align-items-center gap-5">
+          <%= render "score_badge", score_badge_img: "plant", score_badge_alt: "plant", score: "X" %>
+          <%= render "score_badge", score_badge_img: "plant_dying", score_badge_alt: "plant_dying", score: "X" %>
+          <%= render "score_badge", score_badge_img: "raid", score_badge_alt: "raid", score: "X" %>
         </div>
-<p class="m-3">***************************************************</p>
-    <div class="col-md-6 text-center">
+      </div>
+    </div>
+    <p class="my-3 text-center">**********************************************</p>
+    <div class="col-12 text-center">
       <div class="p-3 mt-4">
         <h5>Classement</h5>
-        <%= 'liste des teams classées' %>
+        <%= 'TODO: liste des teams classées' %>
       </div>
     </div>
   </div>
