@@ -3,12 +3,12 @@
   <div class="container-fluid text-center">
     <div class="mb-5">
       <h1 class="pb-1">Winner</h1>
-      <img src="<%= asset_path ('crown_pixel.png') %>" alt="Crown" width="50px" height="50px">
+      <%= image_tag('crown_pixel.png', alt: 'Crown', width: '50px', height: '50px') %>
     </div>
     <div class="space-between">
       <h3 class="space-between">Tu as rapporté </h3>
       <h2 class="space-between" id="point">+<%= @participation.action_type.points %> pts</h2>
-      <h3 class="space-between">à ta team</h3>
+      <h3 class="space-between">à</h3>
       <h2 class="space-between"><%= @participation.user.team.name %></h2>
     </div>
   </div>
