@@ -1,17 +1,21 @@
 <div class="navbar position-absolute bottom-0 w-100 z-3 navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="container-fluid">
+  <div class="container-fluid mx-3">
+<%# <div class="navbar fixed-bottom navbar-expand-sm navbar-light navbar-lewagon">
+  <div class="container-fluid"> %>
     <%= link_to root_path do %>
-      <i class="fa-solid fa-map-location-dot"></i>
+      <%= image_tag('map.svg', alt: 'Map Icon', class: 'rem-icon-size') %>
     <% end %>
     <%= link_to "/" do %>
-      <i class="fa-solid fa-heart"></i>
+      <%= image_tag('heart.svg', alt: 'Favorites Icon', class: 'rem-icon-size') %>
     <% end %>
-    <%= link_to "+", "/" %>
-    <%= link_to "/" do %>
-      <i class="fa-solid fa-users"></i>
+    <%= link_to "/", class: "square-btn btn-relief" do %>
+      <span class="plus-sign">+</span>
     <% end %>
     <%= link_to "/" do %>
-      <i class="fa-solid fa-gear"></i>
+      <%= image_tag('user-group.svg', alt: 'Team Icon', class: 'rem-icon-size') %>
+    <% end %>
+    <%= link_to "/" do %>
+      <%= image_tag('adjustments-horizontal.svg', alt: 'Map Icon', class: 'rem-icon-size') %>
     <% end %>
   </div>
 </div>
