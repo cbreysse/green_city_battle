@@ -1,0 +1,59 @@
+<div class="container mt-4">
+  <h2 class="mt-4 p-3"><%= @team.name %></h2>
+  <hr class="my-4">
+<div class="row">
+    <div class="col-md-12 text-center">
+      <h5>Général</h5>
+      <%= '1500pts   +30pts' %>
+    </div>
+</div>
+  <div class="row d-flex">
+    <div class="col-md-6">
+      <div class="m-3 p-3">
+        <h5 class="mt-4">Détails</h5>
+          <div>
+            <%= image_tag 'plant', height: 60, width: 60, alt: "plant" %>
+            <%= 'Xpts' %>
+          </div>
+          <div>
+            <%= image_tag 'plant_dying', height: 60, width: 60, alt: "plant dying" %>
+            <%= 'Xpts' %>
+          </div>
+          <div>
+            <%= image_tag 'raid', height: 60, width: 60, alt: "raid" %>
+            <%= 'Xpts' %>
+          </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="m-3 p-3 mt-4">
+        <h6>Classement</h6>
+        <%= 'liste des teams classées' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%#
+
+
+  <div class="md-6">
+    <h5>Général</h5>
+      <%= '1500pts   +30pts' %>
+    <%# <div class="d-flex">
+      <div class ="col-6">
+        <div class="m-3 p-3">
+          <h5 class="row mt-4">Details</h5>
+
+          </div>
+        </div>
+      <div class="col-6">
+        <div class="m-3 p-3 mt-4">
+          <h6>Classement</h6>
+            <%# <%= 'liste des teams classées' %>
+        <%# </div>
+        </div>
+      </div>
+    </div>
+</div>  %>

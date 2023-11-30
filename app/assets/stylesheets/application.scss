@@ -11,7 +11,13 @@
 @import "components/index";
 @import "pages/index";
 
+body {
+  background-color: $dark-purple;
+  color: $light-beige
+}
+
 a {
   color: $light-beige;
   text-decoration: none;
 }
+
