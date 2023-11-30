@@ -1,0 +1,13 @@
+  <ul class="list-group m-3">
+    <% @teams.each do |team| %>
+      <li class="d-flex justify-content-between align-items-center">
+      <p><%= team.id %> - </p>
+      <p><%= team.name %></p>
+      <p><%= '1000pts' %></p>
+      <p>
+      <%= '^' %>
+      </p>
+      </li>
+    <% end %>
+  </ul>
+</div>
