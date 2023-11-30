@@ -1,4 +1,15 @@
 <%# <h1>hello</h1> %>
-<div class="container">
-  <h1>Winner</h1>
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="container-fluid text-center">
+    <div class="mb-5">
+      <h1 class="pb-4">Winner</h1>
+      <img src="<%= asset_path ('crown_pixel.png') %>" alt="Crown" width="50px" height="50px">
+    </div>
+    <div>
+      <h3>Tu as rapporté </h3>
+      <h2><%= @participation.action_type.points %> pts</h2>
+      <h3>à ta team</h3>
+      <h2><%= @participation.user.team.name %></h2>
+    </div>
+  </div>
 </div>
