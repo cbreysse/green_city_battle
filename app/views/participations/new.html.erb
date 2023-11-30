@@ -1,0 +1,8 @@
+<h1><%= @spot.name %></h1>
+<%= form_with(model: @participation, local: true, url: root_path) do |form| %>
+  <!-- Your existing form fields here -->
+
+  <%= form.file_field :photo, accept: "image/*", capture: "camera" %>
+
+  <%= form.submit %>
+<% end %>
