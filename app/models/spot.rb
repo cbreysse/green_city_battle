@@ -1,5 +1,6 @@
 class Spot < ApplicationRecord
   belongs_to :team
+  has_many :participations, dependent: :destroy
   has_one_attached :photo
 
   geocoded_by :address
