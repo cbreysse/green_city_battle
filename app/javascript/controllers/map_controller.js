@@ -80,7 +80,6 @@ export default class extends Controller {
       const markerHtml = newMarker.getElement()
       markerHtml.setAttribute('data-action', 'click->map#showSpotDetails')
       markerHtml.setAttribute(`data-id`, marker.spot.id)
-      console.log(markerHtml)
     })
   }
 }
