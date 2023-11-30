@@ -10,3 +10,8 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+a {
+  color: $light-beige;
+  text-decoration: none;
+}
