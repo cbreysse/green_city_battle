@@ -79,7 +79,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_30_104211) do
   create_table "participations", force: :cascade do |t|
     t.bigint "action_type_id", null: false
     t.bigint "user_id", null: false
-    t.bigint "event_id", null: false
+    t.bigint "event_id"
     t.integer "upvotes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
