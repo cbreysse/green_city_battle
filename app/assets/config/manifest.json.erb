@@ -1,8 +1,9 @@
 // app/assets/config/manifest.json.erb
 {
   "background_color": "white",
+  "theme_color":"white",
   "description": "Clash of Green is a game web app for people who wants to make their city greener by playing together.",
-  "display": "fullscreen",
+  "display": "standalone",
   "name": "Clash of Green",
   "icons": [
     <% files = Dir.entries(Rails.root.join("app/assets/images/icons/")).select {|f| !File.directory? f} %>
