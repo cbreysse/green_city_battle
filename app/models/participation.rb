@@ -1,5 +1,5 @@
 class Participation < ApplicationRecord
-  belongs_to :action_type
+  has_one :action_type
   belongs_to :user
   belongs_to :event, optional: true
   belongs_to :spot
