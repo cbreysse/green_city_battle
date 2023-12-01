@@ -14,6 +14,7 @@ class SpotsController < ApplicationController
 
   def show
     @spot = Spot.find(params[:id])
+    @last_participations = @spot.participations.sort_by(&:created_at).first(2)
     respond_to do |format|
       format.text { render(partial: "spots/spot_details", locals: { spot: @spot }, formats: [:html]) }
     end

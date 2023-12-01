@@ -7,11 +7,17 @@ Spot.destroy_all
 
 puts "Creating teams... "
 
-team1 = Team.create!(name: Faker::Team.name)
-team2 = Team.create!(name: Faker::Team.name)
-team3 = Team.create!(name: Faker::Team.name)
+team1 = Team.create!(name: "Team Lyon 1")
+team2 = Team.create!(name: "Team Lyon 2")
+team3 = Team.create!(name: "Team Lyon 3")
+team4 = Team.create!(name: "Team Lyon 4")
+team5 = Team.create!(name: "Team Lyon 5")
+team6 = Team.create!(name: "Team Lyon 6")
+team7 = Team.create!(name: "Team Lyon 7")
+team8 = Team.create!(name: "Team Lyon 8")
+team9 = Team.create!(name: "Team Lyon 9")
 
-teams = [team1, team2, team3]
+teams = [team1, team2, team3, team4, team5, team6, team7, team8, team9]
 
 puts "Creating users..."
 
@@ -68,7 +74,7 @@ end
 
 puts "Creating participations to actions... "
 
-10.times do
+300.times do
   p Participation.create!(
     action_type_id: ActionType.pluck(:id).sample,
     user_id: User.pluck(:id).sample,
