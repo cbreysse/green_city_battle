@@ -3,7 +3,6 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:id])
     spots = @team.spots
     participations = Participation.where(spot: spots)
-    points = participations.map { |p| p.action_type.points }.sum
-    raise
+    @total_points = participations.map { |p| p.action_type.points }.sum
   end
 end
