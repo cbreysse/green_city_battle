@@ -4,10 +4,10 @@
   <div class="row">
     <div class="col-12 text-center mt-4">
       <h4>Général</h4>
-        <div class= "d-flex justify-content-center align-item-baseline">
-          <%= image_tag 'user_marker.png', height: 60, width: 60, alt: "user marker" %>
-          <h6 class="my-3"> '1500pts   +30pts'</h6>
-        </div>
+      <div class= "d-flex justify-content-center align-item-baseline gap-2">
+        <%= image_tag 'user_marker.png', height: 60, width: 60, alt: "user marker" %>
+        <h6 class="my-3"><%= @my_team_total_points %>pts | 🔺30pts</h6>
+      </div>
     </div>
   </div>
   <p class="my-3 text-center">**********************************************</p>
@@ -27,7 +27,7 @@
       <div class="p-3 mt-4">
         <div id="ranking-chart">
           <h5>Classement</h5>
-            <%= render "team_ranking", team: @teams %>
+            <%= render "team_ranking", teams: @total_points_by_team %>
         </div>
       </div>
     </div>
