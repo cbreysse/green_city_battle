@@ -1,5 +1,5 @@
 class SpotsController < ApplicationController
-  skip_before_action :authenticate_user!, only: :index
+  skip_before_action :authenticate_user!, only: %i[index show]
 
   def index
     @markers = Spot.geocoded.map do |spot|
