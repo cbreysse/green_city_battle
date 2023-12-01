@@ -25,8 +25,10 @@
     <p class="my-3 text-center">**********************************************</p>
     <div class="col-12 text-center">
       <div class="p-3 mt-4">
-        <h5>Classement</h5>
-          <%= render "team_ranking", team: @teams %>
+        <div id="ranking-chart">
+          <h5>Classement</h5>
+            <%= render "team_ranking", team: @teams %>
+        </div>
       </div>
     </div>
   </div>
