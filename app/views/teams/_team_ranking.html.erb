@@ -1,15 +1,11 @@
   <ul class="list-group m-3">
-    <% @teams.each do |team| %>
+    <% teams.each do |team| %>
       <li class="d-flex justify-content-between align-items-center">
-      <div class="d-flex">
-        <p><%= team.id %> - </p>
-        <p><%= team.name %></p>
-      </div>
-      <div class="d-flex">
-      <%# ##ici la fonction implementée par la logique de calcul (idem dans controller) + progression des équipes grace au fleches %>
-      <p><%= "1000pts" %></p>
-      <p><%= "🔺🔻" %></p>
-      </div>
+        <p class="<%= team[0] == current_user.team ? "fw-bold" : ""%>"><%= team[0].name %></p>
+        <div class="d-flex justify-content-between">
+          <p><%= team[1] %></p>
+          <p><%= "🔺🔻" %></p> <%# TODO: add logic for arrows %>
+        </div>
       </li>
     <% end %>
   </ul>
