@@ -46,7 +46,7 @@ puts "Creating actions..."
 action1 = ActionType.create!(name: "water spot", points: 10)
 action2 = ActionType.create!(name: "care", points: 10)
 action3 = ActionType.create!(name: "plant", points: 20)
-action4 = ActionType.create!(name: "denounce", points: 5)
+action4 = ActionType.create!(name: "denounce", points: -10)
 
 p actions = [action1, action2, action3, action4]
 
@@ -59,7 +59,8 @@ document = File.read(filepath)
 response = JSON.parse(document)
 spots_data = response["features"]
 
-spots_data.each do |spot_data|
+spots = Rails.env == "development" ? spots_data.first(10) : spots_data
+spots.each do |spot_data|
   random_team = teams.sample.id
   p Spot.create!(
     name: spot_data["properties"]["Name"],
