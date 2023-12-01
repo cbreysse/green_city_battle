@@ -40,7 +40,7 @@ puts "Creating actions..."
 action1 = ActionType.create!(name: "water spot", points: 10)
 action2 = ActionType.create!(name: "care", points: 10)
 action3 = ActionType.create!(name: "plant", points: 20)
-action4 = ActionType.create!(name: "denounce", points: -5)
+action4 = ActionType.create!(name: "denounce", points: -10)
 
 p actions = [action1, action2, action3, action4]
 
