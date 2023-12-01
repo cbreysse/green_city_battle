@@ -73,7 +73,7 @@ end
 
 puts "Creating participations to actions... "
 
-100.times do
+300.times do
   p Participation.create!(
     action_type_id: ActionType.pluck(:id).sample,
     user_id: User.pluck(:id).sample,

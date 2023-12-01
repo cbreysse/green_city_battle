@@ -6,9 +6,9 @@ module ApplicationHelper
   def participation_history(participation)
     case participation.action_type.name
     when "water spot"
-      return "#{participation.user.username} a arrosé #{time_difference_in_days(participation.created_at)}"
+      return "#{participation.user.username} a arrosé le spot #{time_difference_in_days(participation.created_at)}"
     when "care"
-      return "#{participation.user.username} a pris soin du spot #{time_difference_in_days(participation.created_at)}"
+      return "#{participation.user.username} a désherbé le spot #{time_difference_in_days(participation.created_at)}"
     when "plant"
       "#{participation.user.username} a planté #{time_difference_in_days(participation.created_at)}"
     when "denounce"
