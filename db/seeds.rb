@@ -7,11 +7,17 @@ Spot.destroy_all
 
 puts "Creating teams... "
 
-team1 = Team.create!(name: Faker::Team.name)
-team2 = Team.create!(name: Faker::Team.name)
-team3 = Team.create!(name: Faker::Team.name)
+team1 = Team.create!(name: "Lyon 1")
+team2 = Team.create!(name: "Lyon 2")
+team3 = Team.create!(name: "Lyon 3")
+team4 = Team.create!(name: "Lyon 4")
+team5 = Team.create!(name: "Lyon 5")
+team6 = Team.create!(name: "Lyon 6")
+team7 = Team.create!(name: "Lyon 7")
+team8 = Team.create!(name: "Lyon 8")
+team9 = Team.create!(name: "Lyon 9")
 
-teams = [team1, team2, team3]
+teams = [team1, team2, team3, team4, team5, team6, team7, team8, team9]
 
 puts "Creating users..."
 
