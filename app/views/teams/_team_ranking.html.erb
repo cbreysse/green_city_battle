@@ -2,8 +2,8 @@
     <% teams.each do |team| %>
       <li class="d-flex justify-content-between align-items-center">
         <p class="<%= team[0] == current_user.team ? "fw-bold" : ""%>"><%= team[0].name %></p>
-        <div class="d-flex justify-content-between">
-          <p><%= team[1] %></p>
+        <div class="d-flex justify-content-between gap-2">
+          <p><%= team[1] %>pts</p>
           <p><%= "🔺🔻" %></p> <%# TODO: add logic for arrows %>
         </div>
       </li>
