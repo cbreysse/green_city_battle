@@ -2,8 +2,12 @@
   margin-bottom: 32px;
 }
 
-#point {
+#point-win {
   color: $bright-green;
+}
+
+#point-lost {
+  color: red
 }
 
 #ranking-chart {
