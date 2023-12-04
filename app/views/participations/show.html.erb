@@ -1,21 +1,5 @@
 <div class="d-flex justify-content-center align-items-center vh-100" data-controller="confetti">
   <div class="container-fluid text-center">
-    <% if @participation.action_type.name == "water spot" ||
-          @participation.action_type.name == "care" ||
-          @participation.action_type.name == "plant" %>
-      <%= render "success" %>
-    <% else %>
-      <div class="mb-5">
-        <h1 class="pb-1">Green sniper</h1>
-        <div class="pulse">
-          <%= image_tag('ghost_pixel.png', alt: 'Ghost', width: '50px', height: '50px') %>
-        </div>
-      </div>
-    <div class="mb-fat">
-      <h3 class="mb-fat">Tu as fait perdre </h3>
-      <h2 class="mb-fat" id="point-lost"><%= @participation.action_type.points %> pts</h2>
-      <h3 class="mb-fat">à</h3>
-      <h2 class="mb-fat"><%= @participation.spot.team.name %></h2>
-    <% end %>
+    <%= render "action_outcome" %>
     </div>
 </div>
