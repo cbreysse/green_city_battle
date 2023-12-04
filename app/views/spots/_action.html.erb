@@ -1,15 +1,7 @@
 <div class="col-6 position-relative">
   <% link_path = should_block ? "#" : path %>
   <%= link_to link_path do %>
-    <% if should_block %>
-      <div class="timer shadow">
-        <p>Encore 35m</p>
-      </div>
-    <% end %>
+    <%= render "timer", should_block: should_block, spot_id: spot_id, action_id: action_id %>
     <%= yield %>
-    <%# render "shared/badge", { badge_img: "plant_watering.png", badge_text: "Arroser", timer: "4h25s" } %>
   <% end %>
 </div>
-
-
-<%# aciton_id, path, should_block %>

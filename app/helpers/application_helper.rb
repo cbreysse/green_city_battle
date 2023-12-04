@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include ActionIntervals
+
   def address_formatter(address)
     address.split(',').first(2).join(',').gsub(',', '')
   end
@@ -27,22 +29,11 @@ module ApplicationHelper
     return nil unless last_action
 
     last_action_timestamp = last_action.created_at
-    action_intervals = action_intervals_mapping
+    action_intervals = ActionIntervals::INTERVALS_MAPPING
     action_name = ActionType.find(action_id).name
 
     return last_action_timestamp > action_intervals[action_name].ago if action_intervals.key?(action_name)
 
     nil
-  end
-
-  private
-
-  def action_intervals_mapping
-    {
-      "water spot" => 3.days,
-      "care" => 15.days,
-      "plant" => 89.days,
-      "denounce" => 1.day
-    }
   end
 end

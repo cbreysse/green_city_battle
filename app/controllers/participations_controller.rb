@@ -1,4 +1,6 @@
 class ParticipationsController < ApplicationController
+  include ActionIntervals
+
   def new
     @spot = Spot.find(params[:spot_id])
     @participation = Participation.new
@@ -19,6 +21,25 @@ class ParticipationsController < ApplicationController
 
   def show
     @participation = Participation.find(params[:id])
+  end
+
+  def time_until_next_action
+    action = ActionType.find(params[:action_id])
+    spot = Spot.find(params[:spot_id])
+    last_action = Participation.where(spot_id: spot.id, action_type_id: action.id).last
+    if last_action
+      last_action_timestamp = last_action.created_at
+      action_name = action.name
+
+      if ActionIntervals::INTERVALS_MAPPING.key?(action_name)
+        next_possible_action_timestamp = last_action_timestamp + ActionIntervals::INTERVALS_MAPPING[action_name]
+        render json: { next_possible_action_timestamp: next_possible_action_timestamp }
+      else
+        render json: { error: "Action interval not defined in the mapping" }, status: :unprocessable_entity
+      end
+    else
+      render json: { error: "No previous action found" }, status: :unprocessable_entity
+    end
   end
 
   private
