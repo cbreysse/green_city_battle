@@ -1,6 +1,7 @@
 puts "Cleaning db..."
 Participation.destroy_all
 ActionType.destroy_all
+Event.destroy
 User.destroy_all
 Team.destroy_all
 Spot.destroy_all
