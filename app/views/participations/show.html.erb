@@ -1,5 +1,9 @@
 <div class="d-flex justify-content-center align-items-center vh-100" data-controller="confetti">
   <div class="container-fluid text-center">
-    <%= render "action_outcome" %>
+  <% if @participation.action_type.name == "denounce" %>
+    <%= render "denounce_result" %>
+  <% else %>
+    <%= render "other_results" %>
+  <% end %>
     </div>
 </div>
