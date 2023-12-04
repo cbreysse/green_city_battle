@@ -12,8 +12,10 @@ export default class extends Controller {
   static targets = ["map", "spotDetails", "spotDetailsContent"]
 
   connect() {
-    mapboxgl.accessToken = this.apiKeyValue
+    // load geoJSON data
+    this.#loadData()
 
+    mapboxgl.accessToken = this.apiKeyValue
     this.map = new mapboxgl.Map({
       container: this.mapTarget,
       style: "mapbox://styles/kailaulau/clp9syl68003m01o01p266rin"
@@ -22,6 +24,68 @@ export default class extends Controller {
     // wait a bit before jumping to user's location to avoid screen glitching
     setTimeout(this.#geolocateUser, 300)
     this.#addMarkersToMap()
+  }
+
+  async #loadData() {
+    try {
+      const response = await fetch("/arrondissements.json")
+      const data = await response.json()
+      this.map.on('load', () => {
+        data.features.forEach((feature, index) => this.#addNeighbourhoodOverlay(feature, index))
+      })
+    } catch (error) {
+      console.error("Error loading geoJSON data:", error)
+    }
+  }
+
+  #addNeighbourhoodOverlay = (feature, index) => {
+    this.#addCountourSourceToMap(feature)
+    this.#addFillToMap(feature, index)
+    this.#addOutlineToMap(feature)
+  }
+
+  #addCountourSourceToMap = (feature) => {
+    this.map.addSource(feature.properties.nomreduit, {
+      type: 'geojson',
+      data: feature
+    })
+  }
+
+  #addFillToMap = (feature, index) => {
+    const colors = [
+      '#F7F0F5',
+      '#70E666',
+      '#0F431B',
+      '#4C018D',
+      '#0D6EFD',
+      '#FFC65A',
+      '#E67E22',
+      '#1EDD88',
+      '#FD1015'
+    ]
+    this.map.addLayer({
+      id: feature.properties.nomreduit,
+      type: 'fill',
+      source: feature.properties.nomreduit,
+      layout: {},
+      paint: {
+        'fill-color': colors[index],
+        'fill-opacity': 0.3
+        }
+    })
+  }
+
+  #addOutlineToMap = (feature) => {
+    this.map.addLayer({
+      id: feature.properties.nomreduit + '-line',
+      type: 'line',
+      source: feature.properties.nomreduit,
+      layout: {},
+      paint: {
+        'line-color': '#000',
+        'line-width': 1
+      }
+    })
   }
 
   showSpotDetails(event) {
@@ -38,7 +102,7 @@ export default class extends Controller {
     this.spotDetailsTarget.innerHTML = html
     setTimeout(() => {
       this.spotDetailsContentTarget.classList.add('show')
-    }, 100);
+    }, 100)
   }
 
   #geolocateUser = () => {
