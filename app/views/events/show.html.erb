@@ -1,10 +1,18 @@
 <div class="container mt-4">
-  <h2 class="mt-4 p-3 text-center"><%= '@event.event_type_id.name' %></h2>
+  <h2 class="mt-4 p-3 text-center"><%= @event_type.name %> </h2>
   <p class="my-3 text-center">**********************************************</p>
   <div class="row">
-    <div class="col-12 text-center mt-4">
-      <h4>Description</h4>
-      <div class= "d-flex justify-content-center align-item-baseline gap-2">
+    <div class="col-12 text-center ">
+      <div class= "d-flex justify-content-between gap-2">
+        <div class="row">
+          <h4>Gain :</h4>
+          <h4><%= @event_type.points %>pts</h4>
+        </div>
+        <div class="row">
+          <h3>Adresse :</h3>
+          <p><%= @event.spot.address %></p>
+        </div>
+
 
       </div>
     </div>
@@ -12,11 +20,13 @@
   <p class="my-3 text-center">**********************************************</p>
   <div class="row">
     <div class="col-12">
+    <h3>Le projet :</h3>
       <div class="p-3">
         <h5 class="mt-4 text-center"></h5>
-        <div class="d-flex justify-content-center align-items-center gap-5">
-
-        </div>
+          <div class="justify-content-center align-items-center gap-5">
+            <p> Date : <%= @formatted_date %> </p>
+            <p> Description : 'placeholder'</p>
+           </div>
       </div>
     </div>
     <p class="my-3 text-center">**********************************************</p>
