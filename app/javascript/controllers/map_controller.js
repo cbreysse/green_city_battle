@@ -31,14 +31,14 @@ export default class extends Controller {
       const response = await fetch("/arrondissements.json")
       const data = await response.json()
       this.map.on('load', () => {
-        data.features.forEach((feature, index) => this.#addNeighboorhoodOverlay(feature, index))
+        data.features.forEach((feature, index) => this.#addNeighbourhoodOverlay(feature, index))
       })
     } catch (error) {
       console.error("Error loading geoJSON data:", error)
     }
   }
 
-  #addNeighboorhoodOverlay = (feature, index) => {
+  #addNeighbourhoodOverlay = (feature, index) => {
     this.#addCountourSourceToMap(feature)
     this.#addFillToMap(feature, index)
     this.#addOutlineToMap(feature)
