@@ -1,6 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
 import mapboxgl from 'mapbox-gl'
-import * as geojson from '../../assets/arrondissements.jsons'
 
 // Connects to data-controller="map"
 export default class extends Controller {
@@ -13,7 +12,7 @@ export default class extends Controller {
   static targets = ["map", "spotDetails", "spotDetailsContent"]
 
   connect() {
-    console.log(geojson)
+    this.loadData()
     mapboxgl.accessToken = this.apiKeyValue
 
     this.map = new mapboxgl.Map({
@@ -24,6 +23,46 @@ export default class extends Controller {
     // wait a bit before jumping to user's location to avoid screen glitching
     setTimeout(this.#geolocateUser, 300)
     this.#addMarkersToMap()
+  }
+
+  async loadData() {
+    try {
+      // load geoJSON data
+      const response = await fetch("/arrondissements.json")
+      const data = await response.json()
+      this.map.on('load', () => {
+        data.features.forEach((feature) => {
+          this.map.addSource(feature.properties.nomreduit, {
+            type: 'geojson',
+            data: feature
+          })
+
+          this.map.addLayer({
+            id: feature.properties.nomreduit,
+            type: 'fill',
+            source: feature.properties.nomreduit,
+            layout: {},
+            paint: {
+              'fill-color': '#0080ff',
+              'fill-opacity': 0.5
+              }
+          })
+
+          this.map.addLayer({
+            id: feature.properties.nomreduit + '-line',
+            type: 'line',
+            source: feature.properties.nomreduit,
+            layout: {},
+            paint: {
+              'line-color': '#000',
+              'line-width': 3
+            }
+            });
+        })
+      })
+    } catch (error) {
+      console.error("Error loading geoJSON data:", error)
+    }
   }
 
   showSpotDetails(event) {
@@ -40,7 +79,7 @@ export default class extends Controller {
     this.spotDetailsTarget.innerHTML = html
     setTimeout(() => {
       this.spotDetailsContentTarget.classList.add('show')
-    }, 100);
+    }, 100)
   }
 
   #geolocateUser = () => {
