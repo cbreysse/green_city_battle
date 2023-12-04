@@ -1,22 +1,21 @@
 <div class="container mt-4">
-  <h2 class="mt-4 p-3 text-center"><%= @event_type.name %> </h2>
+  <h2 class="mt-4 p-3"><%= @event_type.name %> </h2>
   <p class="my-3 text-center">**********************************************</p>
   <div class="row">
-    <div class="col-12 text-center ">
-      <div class= "d-flex justify-content-between gap-2">
-        <div class="row">
-          <h4>Gain :</h4>
-          <h4><%= @event_type.points %>pts</h4>
+    <div class="col-12 ">
+        <div class="col-6 text-align-center">
+          <%# <p><%= render "shared/score_badge", score_badge_img: "trophy_pixel.png", score_badge_alt: "trophy", score: @event_type.points %>
+          <%# <p><%= render "shared/score_badge", score_badge_img: "user_marker.png", score_badge_alt: "user", score: "0 /10" contributeurs %>
+          <%# Mettre ici un link to je participe  %>
         </div>
-        <div class="row">
-          <h3>Adresse :</h3>
-          <p><%= @event.spot.address %></p>
-        </div>
-
-
-      </div>
     </div>
   </div>
+  <p class="my-3 text-center">**********************************************</p>
+    <div class ="row">
+      <h3>Adresse :</h3>
+      <%# ##remplacer par une mini map  %>
+      <p><%= @event.spot.address %></p>
+    </div>
   <p class="my-3 text-center">**********************************************</p>
   <div class="row">
     <div class="col-12">
@@ -25,16 +24,14 @@
         <h5 class="mt-4 text-center"></h5>
           <div class="justify-content-center align-items-center gap-5">
             <p> Date : <%= @formatted_date %> </p>
-            <p> Description : 'placeholder'</p>
-           </div>
+            <p> Description : <%= @event.description %> </p>
+          </div>
       </div>
     </div>
     <p class="my-3 text-center">**********************************************</p>
     <div class="col-12 text-center">
       <div class="p-3 mt-4">
-
-        </div>
       </div>
     </div>
-  </div>
+</div>
 </div>
