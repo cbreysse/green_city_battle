@@ -1,17 +1,9 @@
-<%# <h1>hello</h1> %>
 <div class="d-flex justify-content-center align-items-center vh-100" data-controller="confetti">
   <div class="container-fluid text-center">
-    <div class="mb-5">
-      <h1 class="pb-1">Winner</h1>
-      <div class="pulse">
-        <%= image_tag('crown_pixel.png', alt: 'Crown', width: '50px', height: '50px') %>
-      </div>
+  <% if @participation.action_type.name == "denounce" %>
+    <%= render "denounce_result" %>
+  <% else %>
+    <%= render "other_results" %>
+  <% end %>
     </div>
-    <div class="mb-fat">
-      <h3 class="mb-fat">Tu as rapporté </h3>
-      <h2 class="mb-fat" id="point"><%= @participation.action_type.points %> pts</h2>
-      <h3 class="mb-fat">à</h3>
-      <h2 class="mb-fat"><%= @participation.user.team.name %></h2>
-    </div>
-  </div>
 </div>
