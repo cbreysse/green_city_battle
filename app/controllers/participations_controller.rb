@@ -1,4 +1,5 @@
 class ParticipationsController < ApplicationController
+  skip_before_action :authenticate_user!, only: :time_until_next_action
   include ActionIntervals
 
   def new
