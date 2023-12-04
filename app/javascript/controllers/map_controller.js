@@ -12,9 +12,10 @@ export default class extends Controller {
   static targets = ["map", "spotDetails", "spotDetailsContent"]
 
   connect() {
-    this.loadData()
-    mapboxgl.accessToken = this.apiKeyValue
+    // load geoJSON data
+    this.#loadData()
 
+    mapboxgl.accessToken = this.apiKeyValue
     this.map = new mapboxgl.Map({
       container: this.mapTarget,
       style: "mapbox://styles/kailaulau/clp9syl68003m01o01p266rin"
@@ -25,44 +26,66 @@ export default class extends Controller {
     this.#addMarkersToMap()
   }
 
-  async loadData() {
+  async #loadData() {
     try {
-      // load geoJSON data
       const response = await fetch("/arrondissements.json")
       const data = await response.json()
       this.map.on('load', () => {
-        data.features.forEach((feature) => {
-          this.map.addSource(feature.properties.nomreduit, {
-            type: 'geojson',
-            data: feature
-          })
-
-          this.map.addLayer({
-            id: feature.properties.nomreduit,
-            type: 'fill',
-            source: feature.properties.nomreduit,
-            layout: {},
-            paint: {
-              'fill-color': '#0080ff',
-              'fill-opacity': 0.5
-              }
-          })
-
-          this.map.addLayer({
-            id: feature.properties.nomreduit + '-line',
-            type: 'line',
-            source: feature.properties.nomreduit,
-            layout: {},
-            paint: {
-              'line-color': '#000',
-              'line-width': 3
-            }
-            });
-        })
+        data.features.forEach((feature, index) => this.#addNeighboorhoodOverlay(feature, index))
       })
     } catch (error) {
       console.error("Error loading geoJSON data:", error)
     }
+  }
+
+  #addNeighboorhoodOverlay = (feature, index) => {
+    this.#addCountourSourceToMap(feature)
+    this.#addFillToMap(feature, index)
+    this.#addOutlineToMap(feature)
+  }
+
+  #addCountourSourceToMap = (feature) => {
+    this.map.addSource(feature.properties.nomreduit, {
+      type: 'geojson',
+      data: feature
+    })
+  }
+
+  #addFillToMap = (feature, index) => {
+    const colors = [
+      '#F7F0F5',
+      '#70E666',
+      '#0F431B',
+      '#4C018D',
+      '#0D6EFD',
+      '#FFC65A',
+      '#E67E22',
+      '#1EDD88',
+      '#FD1015'
+    ]
+    this.map.addLayer({
+      id: feature.properties.nomreduit,
+      type: 'fill',
+      source: feature.properties.nomreduit,
+      layout: {},
+      paint: {
+        'fill-color': colors[index],
+        'fill-opacity': 0.3
+        }
+    })
+  }
+
+  #addOutlineToMap = (feature) => {
+    this.map.addLayer({
+      id: feature.properties.nomreduit + '-line',
+      type: 'line',
+      source: feature.properties.nomreduit,
+      layout: {},
+      paint: {
+        'line-color': '#000',
+        'line-width': 1
+      }
+    })
   }
 
   showSpotDetails(event) {
