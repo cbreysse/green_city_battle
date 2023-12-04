@@ -1,6 +1,8 @@
 puts "Cleaning db..."
 Participation.destroy_all
 ActionType.destroy_all
+Event.destroy_all
+EventType.destroy_all
 User.destroy_all
 Team.destroy_all
 Spot.destroy_all
@@ -84,5 +86,33 @@ puts "Creating participations to actions... "
 end
 
 puts "Participations created!"
+
+puts "Creating events..."
+
+event_type1 = EventType.create!(name: "Nouvelle oasis", points: 100)
+event_type2 = EventType.create!(name: "Green bombing", points: 200)
+event_type3 = EventType.create!(name: "Green raid", points: 300)
+
+event_types = [event_type1, event_type2, event_type3]
+
+100.times do
+  p Event.create!(
+    spot_id: Spot.pluck(:id).sample,
+    occurs_at: rand(15.days).seconds.ago,
+    description: "blabla",
+    event_type_id: EventType.pluck(:id).sample
+  )
+end
+
+50.times do
+  p Participation.create!(
+    event_id: Event.pluck(:id).sample,
+    user_id: User.pluck(:id).sample,
+    upvotes: rand(1..10),
+    spot_id: Spot.pluck(:id).sample
+  )
+end
+
+puts "Event participations created!"
 
 puts "Finished!"
