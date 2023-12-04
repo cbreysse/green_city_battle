@@ -14,7 +14,7 @@ module ApplicationHelper
     when "plant"
       "#{participation.user.username} a planté #{time_difference_in_days(participation.created_at)}"
     when "denounce"
-      return "La team #{participation.user.team.name} vous a trash #{time_difference_in_days(participation.created_at)}!"
+      return "#{participation.user.team.name} vous a trash #{time_difference_in_days(participation.created_at)}!"
     end
   end
 
