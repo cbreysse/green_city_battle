@@ -20,4 +20,19 @@ module ApplicationHelper
     distance_in_days = ((to_time - from_time) / 1.day).round
     return "il y a #{distance_in_days} jour#{'s' unless distance_in_days == 1}"
   end
+
+  def block_action(spot_id, action_id)
+    last_action_timestamp = Participation.where(spot_id: spot_id, action_type_id: action_id).last.created_at
+    action_intervals = {
+      "water spot" => 3.days,
+      "care" => 15.days,
+      "plant" => 89.days,
+      "denounce" => 1.day
+    }
+
+    action_name = ActionType.find(action_id).name
+    return last_action_timestamp > action_intervals[action_name].ago if action_intervals.key?(action_name)
+
+    nil
+  end
 end

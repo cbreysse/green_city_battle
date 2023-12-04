@@ -1,0 +1,14 @@
+.timer {
+  background-color: $gray;
+  color: $light-beige;
+  padding: 8px 24px;
+  border-radius: 4px;
+  transform: rotate(-20deg);
+  position: absolute;
+  z-index: 1000;
+  border: 2px solid $light-beige;
+
+  p {
+    margin: 0;
+  }
+}
