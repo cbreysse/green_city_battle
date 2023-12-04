@@ -1,0 +1,18 @@
+.pulse {
+  animation: pulse 1s infinite ease-out;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.5); /* scaling to 0 */
+  }
+  50% {
+    transform: scale(1.1); /* increasing the size */
+  }
+  70% {
+    transform: scale(0.65); /* decreasing the size */
+  }
+  100% {
+    transform: scale(0.5); /* seeting back to initial size */
+  }
+}
