@@ -22,17 +22,27 @@ module ApplicationHelper
   end
 
   def block_action(spot_id, action_id)
-    last_action_timestamp = Participation.where(spot_id: spot_id, action_type_id: action_id).last.created_at
-    action_intervals = {
+    last_action = Participation.where(spot_id: spot_id, action_type_id: action_id).last
+
+    return nil unless last_action
+
+    last_action_timestamp = last_action.created_at
+    action_intervals = action_intervals_mapping
+    action_name = ActionType.find(action_id).name
+
+    return last_action_timestamp > action_intervals[action_name].ago if action_intervals.key?(action_name)
+
+    nil
+  end
+
+  private
+
+  def action_intervals_mapping
+    {
       "water spot" => 3.days,
       "care" => 15.days,
       "plant" => 89.days,
       "denounce" => 1.day
     }
-
-    action_name = ActionType.find(action_id).name
-    return last_action_timestamp > action_intervals[action_name].ago if action_intervals.key?(action_name)
-
-    nil
   end
 end
