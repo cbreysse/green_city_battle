@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <ul>
     <% @last_participations.each do |participation| %>
-      <li>
+      <li class="participation-item w-100" >
         <%= participation_history(participation) %>
       </li>
     <% end %>
