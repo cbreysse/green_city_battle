@@ -21,6 +21,7 @@ team9 = Team.create!(name: "Team Lyon 9")
 
 teams = [team1, team2, team3, team4, team5, team6, team7, team8, team9]
 
+## demo user
 puts "Creating main user..."
 
 main_user = User.create!(
@@ -72,6 +73,16 @@ document = File.read(filepath)
 response = JSON.parse(document)
 spots_data = response["features"]
 
+## demo spot
+spot1 = Spot.create!(
+  name: "Rue de l'Abbé Rozier",
+  latitude: 45.7696049,
+  longitude: 4.8339815,
+  spot_type: "Végétalisation mixte",
+  team_id: team1.id,
+  is_open: true,
+  is_dry: true
+)
 spots = Rails.env == "development" ? spots_data.first(10) : spots_data
 spots.each do |spot_data|
   random_team = teams.sample.id
