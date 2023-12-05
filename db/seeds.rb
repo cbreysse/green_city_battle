@@ -138,7 +138,7 @@ excluded_spot_ids = [spot1.id, spot2.id]
     user_id: User.pluck(:id).sample,
     upvotes: rand(1..10),
     spot: Spot.where.not(id: excluded_spot_ids).sample,
-    created_at: rand(15.days).seconds.ago
+    created_at: rand(6.days).seconds.ago
   )
 end
 
