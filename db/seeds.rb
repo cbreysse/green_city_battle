@@ -73,16 +73,16 @@ document = File.read(filepath)
 response = JSON.parse(document)
 spots_data = response["features"]
 
-# ## demo spot
-# spot1 = Spot.create!(
-#   name: "Rue de l'Abbé Rozier",
-#   latitude: 45.7696049,
-#   longitude: 4.8339815,
-#   spot_type: "Végétalisation mixte",
-#   team_id: team1.id,
-#   is_open: true,
-#   is_dry: true
-# )
+## demo spot
+spot1 = Spot.create!(
+  name: "Rue de l'Abbé Rozier",
+  latitude: 45.7696049,
+  longitude: 4.8339815,
+  spot_type: "Végétalisation mixte",
+  team_id: team1.id,
+  is_open: true,
+  is_dry: true
+)
 
 spots = Rails.env == "development" ? spots_data.first(10) : spots_data
 spots.each do |spot_data|
@@ -97,20 +97,20 @@ spots.each do |spot_data|
   )
 end
 
-## demo spot excluded
-# excluded_spot_id = spot1.id
-# other_spots_id = Spot.where.not(id: excluded_spot_id).pluck(:id)
+# demo spot excluded
+excluded_spot_id = spot1.id
+other_spots_id = Spot.where.not(id: excluded_spot_id).pluck(:id)
 
 puts "Creating participations to actions... "
 
-# ## demo participation
-# participation1 = Participation.create!(
-#   action_type_id: action4.id,
-#   user_id: User.pluck(:id).sample,
-#   upvotes: rand(1..10),
-#   spot_id: spot1.id,
-#   created_at: Date.today
-# )
+## demo participation
+participation1 = Participation.create!(
+  action_type_id: action4.id,
+  user_id: User.pluck(:id).sample,
+  upvotes: rand(1..10),
+  spot_id: spot1.id,
+  created_at: Date.today
+)
 
 300.times do
   p Participation.create!(
