@@ -1,4 +1,5 @@
 class SpotsController < ApplicationController
+  include ActionIntervals
   skip_before_action :authenticate_user!, only: %i[index show]
 
   def index
@@ -31,7 +32,7 @@ class SpotsController < ApplicationController
 
   def spot_marker(spot)
     if spot.is_open?
-      if spot.is_dry?
+      if plant_dry?(spot)
         'plant_dying.png'
       else
         'plant.png'
