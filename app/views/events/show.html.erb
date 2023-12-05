@@ -4,9 +4,26 @@
   <div class="row">
     <div class="col-12 ">
         <div class="col-6 text-align-center">
-          <%# <p><%= render "shared/score_badge", score_badge_img: "trophy_pixel.png", score_badge_alt: "trophy", score: @event_type.points %>
-          <%# <p><%= render "shared/score_badge", score_badge_img: "user_marker.png", score_badge_alt: "user", score: "0 /10" contributeurs %>
-          <%# Mettre ici un link to je participe  %>
+        <%= image_tag("trophy_pixel.png", width: 80, height: 80, crop: :fill) %>
+        <h3><%= @event_type.points %>pts</h3>
+        <%= image_tag("user_marker.png", width: 80, height: 80, crop: :fill) %>
+        <h3><%= '0/10' %>contributeurs</h3>
+        <% if @current_user_is_participating %>
+          Bravo tu participes déjà!
+        <% else %>
+          <%= link_to "Je participe", spot_participations_path(@event.spot, participation: { event_id: @event.id}), class: "btn btn-primary", data: { turbo_method: :post } %>
+        <% end %>
+
+
+
+
+
+
+
+
+
+
+
         </div>
     </div>
   </div>

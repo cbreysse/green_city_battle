@@ -11,7 +11,10 @@ class TeamsController < ApplicationController
   private
 
   def calculate_total_points(participations)
-    participations.map { |p| p.action_type.points }.sum
+    mapped_participations = participations.map do |p|
+      p.action_type.nil? ? p.event.event_type.points : p.action_type.points
+    end
+    mapped_participations.sum
   end
 
   def calculate_total_points_by_team(participations)

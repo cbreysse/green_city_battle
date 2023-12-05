@@ -81,7 +81,8 @@ puts "Creating participations to actions... "
     action_type_id: ActionType.pluck(:id).sample,
     user_id: User.pluck(:id).sample,
     upvotes: rand(1..10),
-    spot_id: Spot.pluck(:id).sample
+    spot_id: Spot.pluck(:id).sample,
+    created_at: rand(15.days).seconds.ago
   )
 end
 
@@ -109,7 +110,8 @@ end
     event_id: Event.pluck(:id).sample,
     user_id: User.pluck(:id).sample,
     upvotes: rand(1..10),
-    spot_id: Spot.pluck(:id).sample
+    spot_id: Spot.pluck(:id).sample,
+    created_at: rand(30.days).seconds.ago,
   )
 end
 
