@@ -137,13 +137,15 @@ export default class extends Controller {
 
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
-      const newMarker = new mapboxgl.Marker()
+      const customMarker = document.createElement("div")
+    customMarker.innerHTML = marker.marker_html
+      const newMarker = new mapboxgl.Marker(customMarker)
         .setLngLat([ marker.lng, marker.lat ])
         .addTo(this.map)
 
       const markerHtml = newMarker.getElement()
       markerHtml.setAttribute('data-action', 'click->map#showSpotDetails')
-      markerHtml.setAttribute(`data-id`, marker.spot.id)
+      markerHtml.setAttribute(`data-id`, marker.id)
     })
   }
 }
