@@ -98,6 +98,7 @@ spot2 = Spot.create!(
 photo2 = File.open(Rails.root.join('app/assets/images/flower_bed.png'))
 spot2.photo.attach(io: photo2, filename: "flower_bed.jpg")
 
+## new spot in Lyon 1
 new_spot1 = Spot.create!(
   name: "Place Chardonnet",
   latitude: 45.7708912,
@@ -125,6 +126,36 @@ new_spot3 = Spot.create!(
   is_open: false
 )
 
+## new spot elsewhere
+new_spot4 = Spot.create!(
+  name: "Place Gailleton",
+  latitude: 45.7535452,
+  longitude: 4.8327382,
+  spot_type: "Végétalisation mixte",
+  team_id: team1.id,
+  is_open: false
+)
+
+new_spot5 = Spot.create!(
+  name: "Montée du Télégraphe",
+  latitude: 45.7579594,
+  longitude: 4.8170384,
+  spot_type: "Végétalisation mixte",
+  team_id: team1.id,
+  is_open: false
+)
+
+new_spot6 = Spot.create!(
+  name: "Montée de l'Observance",
+  latitude: 45.7690504,
+  longitude: 4.81029,
+  spot_type: "Végétalisation mixte",
+  team_id: team1.id,
+  is_open: false
+)
+
+excluded_spot_ids = [spot1.id, spot2.id, new_spot1.id, new_spot2.id, new_spot3.id, new_spot4.id, new_spot5.id, new_spot6.id]
+
 spots = Rails.env == "development" ? spots_data.first(10) : spots_data
 spots.each do |spot_data|
   random_team = teams.sample.id
@@ -138,11 +169,10 @@ spots.each do |spot_data|
   )
 end
 
-excluded_spot_ids = [spot1.id, spot2.id, new_spot1.id, new_spot2.id, new_spot3.id]
 
 puts "Creating participations to actions... "
 
-## demo participation
+## demo participation trash
 participation1 = Participation.create!(
   action_type_id: action4.id,
   user_id: User.pluck(:id).sample,
@@ -151,6 +181,7 @@ participation1 = Participation.create!(
   created_at: Date.today
 )
 
+## demo participation care
 participation2 = Participation.create!(
   action_type_id: action3.id,
   user_id: User.pluck(:id).sample,
@@ -158,7 +189,6 @@ participation2 = Participation.create!(
   spot_id: spot2.id,
   created_at: Date.today
 )
-
 
 300.times do
   p Participation.create!(
