@@ -11,9 +11,15 @@ class ParticipationsController < ApplicationController
   def create
     @spot = Spot.find(params[:spot_id])
     @participation = Participation.new(participation_params)
+    @event = @participation.event
     configure_participation(@participation)
-    if @participation.save
-      redirect_to participation_path(@participation)
+
+    if current_user_already_participating?
+      flash.now.alert = "Vous participez déjà à cet événement."
+      render :new, status: :unprocessable_entity
+    elsif @participation.save
+      redirection_path = @event.present? ? event_path(@event) : participation_path(@participation)
+      redirect_to redirection_path
     else
       flash.alert = @participation.errors.full_messages
       render :new, status: :unprocessable_entity
@@ -46,12 +52,16 @@ class ParticipationsController < ApplicationController
   private
 
   def participation_params
-    params.require(:participation).permit(:action_type, :photo)
+    params.require(:participation).permit(:action_type, :photo, :event_id)
   end
 
   def configure_participation(participation)
     participation.spot = @spot
     participation.user = current_user
-    participation.action_type = ActionType.find(params[:action_type])
+    participation.action_type = ActionType.find(params[:action_type]) unless @event.present?
+  end
+
+  def current_user_already_participating?
+    @event.present? && current_user.participations.exists?(event: @event)
   end
 end
