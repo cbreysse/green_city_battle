@@ -1,8 +1,8 @@
 <div data-controller="plus-btn">
-  <div class="square-btn">
+  <div class="square-btn" data-action="click->plus-btn#handleClick">
       <span class="plus-sign">+</span>
   </div>
-  <div class="d-flex gap-2 radial-popup hidden">
+  <div class="d-flex gap-2 radial-popup hidden" data-plus-btn-target="popup">
     <%= render "shared/badge", badge_img: "planting.png", badge_text: "Nouvelle Oasis", size: "width: 60px; height: 60px;", custom_class: "btn-raid text-center shadow" %>
     <%= render "shared/badge", badge_img: "plant.png", badge_text: "Green Bombing", size: "width: 60px; height: 60px;", custom_class: "btn-raid text-center shadow" %>
     <%= render "shared/badge", badge_img: "plant_watering.png", badge_text: "Green Raid", size: "width: 60px; height: 60px;", custom_class: "btn-raid text-center shadow" %>
