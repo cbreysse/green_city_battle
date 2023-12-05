@@ -1,37 +1,36 @@
 <div class="container mt-4">
-  <h2 class="mt-4 p-3"><%= @event_type.name %> </h2>
+  <div class="text-center mt-4 p-3 align-items-center justify-content-center">
+    <h2><%= @event_type.name %> </h2>
+      <div class="mt-4">
+        <% if @current_user_is_participating %>
+          Bravo tu es inscrit à cet event!
+        <% else %>
+          <%= link_to "Je participe", spot_participations_path(@event.spot, participation: { event_id: @event.id}), class: "pill-button btn btn-success", data: { turbo_method: :post } %>
+        <% end %>
+      </div>
+  </div>
   <p class="my-3 text-center">**********************************************</p>
   <div class="row">
-    <div class="col-12 ">
-        <div class="col-6 text-align-center">
-        <%= image_tag("trophy_pixel.png", width: 80, height: 80, crop: :fill) %>
-        <h3><%= @event_type.points %>pts</h3>
-        <%= image_tag("user_marker.png", width: 80, height: 80, crop: :fill) %>
-        <h3><%= '0/10' %>contributeurs</h3>
-        <% if @current_user_is_participating %>
-          Bravo tu participes déjà!
-        <% else %>
-          <%= link_to "Je participe", spot_participations_path(@event.spot, participation: { event_id: @event.id}), class: "btn btn-primary", data: { turbo_method: :post } %>
-        <% end %>
-
-
-
-
-
-
-
-
-
-
-
+    <div class="col-12 d-flex justify-content-center align-items-start p-4">
+        <div class="col-6 text-align-center gap-4">
+          <%= image_tag("trophy_pixel.png", width: 80, height: 80, crop: :fill) %>
+          <h3 class ="mt-4"><%= @event_type.points %>pts</h3>
+        </div>
+        <div class= "text-center">
+          <%= image_tag("user_marker.png", width: 80, height: 80, crop: :fill) %>
+          <h3  class ="mt-4"><%= "#{current_user.participations.count}" %></h3>
+          <p>contributeurs</p>
         </div>
     </div>
   </div>
   <p class="my-3 text-center">**********************************************</p>
     <div class ="row">
       <h3>Adresse :</h3>
-      <%# ##remplacer par une mini map  %>
-      <p><%= @event.spot.address %></p>
+      <div style="width: 100%; height: 200px;"
+        data-controller="map"
+        data-map-markers-value="<%= @markers.to_json %>"
+        data-map-user-marker-value='<%=  %>'
+        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
     </div>
   <p class="my-3 text-center">**********************************************</p>
   <div class="row">

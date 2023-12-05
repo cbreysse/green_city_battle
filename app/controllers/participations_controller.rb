@@ -14,7 +14,10 @@ class ParticipationsController < ApplicationController
     @event = @participation.event
     configure_participation(@participation)
 
-    if @participation.save
+    if current_user_already_participating?
+      flash.now.alert = "Vous participez déjà à cet événement."
+      render :new, status: :unprocessable_entity
+    elsif @participation.save
       redirection_path = @event.present? ? event_path(@event) : participation_path(@participation)
       redirect_to redirection_path
     else
@@ -56,5 +59,9 @@ class ParticipationsController < ApplicationController
     participation.spot = @spot
     participation.user = current_user
     participation.action_type = ActionType.find(params[:action_type]) unless @event.present?
+  end
+
+  def current_user_already_participating?
+    @event.present? && current_user.participations.exists?(event: @event)
   end
 end
