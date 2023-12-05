@@ -80,8 +80,7 @@ spot1 = Spot.create!(
   longitude: 4.8339815,
   spot_type: "Végétalisation mixte",
   team_id: team1.id,
-  is_open: true,
-  is_dry: true
+  is_open: true
 )
 
 spots = Rails.env == "development" ? spots_data.first(10) : spots_data
