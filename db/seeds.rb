@@ -21,9 +21,20 @@ team9 = Team.create!(name: "Team Lyon 9")
 
 teams = [team1, team2, team3, team4, team5, team6, team7, team8, team9]
 
+puts "Creating main user..."
+
+main_user = User.create!(
+  email: "test@test.com",
+  password: "123456",
+  address: "20 Rue des Capucins, 69001 Lyon",
+  username: "JeanRacine",
+  team: team1
+)
+puts "Main user's email is #{main_user.email}"
+
 puts "Creating users..."
 
-addresses = ["20 Rue des Capucins, 69001 Lyon", "85 Cours Albert Thomas, 69003, Lyon", "5 Place Saint-Jean, 69005, Lyon", "251 Rue Paul Bert, 69003, Lyon,", "3 Place Bertone, 69004, Lyon", "48 Rue Henon, 69004, Lyon", "11 Place du Marechal Lyautey, 69006, Lyon", "32 Rue de Marseille, 69007, Lyon", "19 Rue Royale, 69001, Lyon", "8 Rue de la Navigation, 69009, Lyon", "21 Quai Victor Augagneur, 69003, Lyon", "33 Avenue Jean Jaures, 69007, Lyon", "11 Boulevard Marius Vivier Merle, 69003, Lyon", "40 Rue de l'Abondance, 69003, Lyon", "16 Quai de Bondy, 69005, Lyon",]
+addresses = ["85 Cours Albert Thomas, 69003, Lyon", "5 Place Saint-Jean, 69005, Lyon", "251 Rue Paul Bert, 69003, Lyon,", "3 Place Bertone, 69004, Lyon", "48 Rue Henon, 69004, Lyon", "11 Place du Marechal Lyautey, 69006, Lyon", "32 Rue de Marseille, 69007, Lyon", "19 Rue Royale, 69001, Lyon", "8 Rue de la Navigation, 69009, Lyon", "21 Quai Victor Augagneur, 69003, Lyon", "33 Avenue Jean Jaures, 69007, Lyon", "11 Boulevard Marius Vivier Merle, 69003, Lyon", "40 Rue de l'Abondance, 69003, Lyon", "16 Quai de Bondy, 69005, Lyon",]
 
 addresses.each_with_index do |address, i|
   counter = i + 1
