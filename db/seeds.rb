@@ -82,6 +82,16 @@ spot1 = Spot.create!(
   team_id: team1.id,
   is_open: true
 )
+spot1.photo.attach(io: URI.open(cloudinary_url), filename: 'image.jpg')
+
+spot2 = spot1 = Spot.create!(
+  name: "Rue René Leynaud",
+  latitude: 45.7698596,
+  longitude: 4.8338336,
+  spot_type: "Végétalisation mixte",
+  team_id: team1.id,
+  is_open: true
+)
 
 spots = Rails.env == "development" ? spots_data.first(10) : spots_data
 spots.each do |spot_data|
@@ -97,7 +107,7 @@ spots.each do |spot_data|
 end
 
 # demo spot excluded
-excluded_spot_id = spot1.id
+excluded_spot_id = [spot1.id, spot2.id]
 other_spots_id = Spot.where.not(id: excluded_spot_id).pluck(:id)
 
 puts "Creating participations to actions... "
@@ -111,12 +121,20 @@ participation1 = Participation.create!(
   created_at: Date.today
 )
 
+participation2 = Participation.create!(
+  action_type_id: action3.id,
+  user_id: User.pluck(:id).sample,
+  upvotes: rand(1..10),
+  spot_id: spot2.id,
+  created_at: Date.today
+)
+
 300.times do
   p Participation.create!(
     action_type_id: ActionType.pluck(:id).sample,
     user_id: User.pluck(:id).sample,
     upvotes: rand(1..10),
-    spot_id: Spot.pluck(:id).sample,
+    spot_id: other_spot_ids.sample,
     created_at: rand(15.days).seconds.ago
   )
 end
