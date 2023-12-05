@@ -4,7 +4,7 @@
         <p class="<%= team[0] == current_user.team ? "fw-bold" : ""%>"><%= team[0].name %></p>
         <div class="d-flex justify-content-between gap-2">
           <p><%= team[1] %>pts</p>
-          <p><%= "🔺🔻" %></p> <%# TODO: add logic for arrows %>
+          <p><%= ["🔺""🔻"].sample %></p> <%# TODO: add logic for arrows %>
         </div>
       </li>
     <% end %>
