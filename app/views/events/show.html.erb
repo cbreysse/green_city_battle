@@ -10,7 +10,7 @@
         <% end %>
       </div>
   </div>
-  <p class="my-3 text-center">**********************************************</p>
+  <%= render "shared/divider" %>
   <div class="row">
     <div class="d-flex justify-content-center align-items-start gap-4">
         <div class="col-6 text-center mx-auto">
@@ -25,7 +25,7 @@
         </div>
     </div>
   </div>
-  <p class="my-3 text-center">**********************************************</p>
+  <%= render "shared/divider" %>
     <div class ="row">
       <h6>Adresse :</h6>
         <p class= "m-8"><%= @event.spot.name %></p>
@@ -34,7 +34,7 @@
         data-mini-map-marker-value="<%= @marker.to_json %>"
         data-mini-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
     </div>
-  <p class="my-3 text-center">**********************************************</p>
+  <%= render "shared/divider" %>
   <div class="row">
     <div class="col-12">
     <h3>Le projet :</h3>
@@ -46,7 +46,7 @@
           </div>
       </div>
     </div>
-    <p class="my-3 text-center">**********************************************</p>
+    <%= render "shared/divider" %>
     <div class="col-12 text-center">
       <div class="p-3 mt-4">
       </div>

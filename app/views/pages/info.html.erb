@@ -1,0 +1,10 @@
+<div class="container mt-5">
+  <div class="pt-4 d-flex gap-4 justify-content-center align-items-baseline">
+    <%= image_tag "user_marker.png", height: 60, width: 60 %>
+    <h2><%= current_user.username %></h2>
+  </div>
+  <%= render "shared/divider" %>
+  <div class="container mx-2">
+    <h3>Règles du jeu</h3>
+  </div>
+</div>
