@@ -17,6 +17,9 @@
 }
 
 .square-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 3rem; /* Ajustez la largeur selon vos besoins */
   height: 3rem; /* Ajustez la hauteur selon vos besoins */
   background-color: #4CAF50; /* Couleur verte */
@@ -29,10 +32,46 @@
 .plus-sign {
   font-size: 3rem;
   color: #fff;
+  margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -56%);
+}
+
+.radial-popup {
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all .5s ease-in-out;
+  z-index: 1;
+
+  & > *:nth-child(1), & > *:nth-child(2), & > *:nth-child(3) {
+    transform: translateX(0);
+    transition: all .5s ease-in-out;
+  }
+
+  &.hidden {
+    transform: translate(-50%, 500%);
+    & > *:nth-child(1) { transform: translateX(200%); }
+    & > *:nth-child(3) { transform: translateX(-200%); }
+  }
+}
+
+.btn-raid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $purple;
+  border-radius: 50%;
+  height: 110px;
+  width: 110px;
+  padding: 2px;
+
+  p {
+    margin: 0;
+  }
 }
 
 .navbar-top {
