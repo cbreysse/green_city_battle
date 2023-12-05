@@ -86,7 +86,7 @@ spot1 = Spot.create!(
 photo1 = File.open(Rails.root.join('app/assets/images/planter.png'))
 spot1.photo.attach(io: photo1, filename: "planter.jpg")
 
-spot2 = spot1 = Spot.create!(
+spot2 = Spot.create!(
   name: "Rue René Leynaud",
   latitude: 45.7698596,
   longitude: 4.8338336,
@@ -95,7 +95,8 @@ spot2 = spot1 = Spot.create!(
   is_open: true
 )
 
-
+photo2 = File.open(Rails.root.join('app/assets/images/flower_bed.png'))
+spot2.photo.attach(io: photo2, filename: "flower_bed.jpg")
 
 spots = Rails.env == "development" ? spots_data.first(10) : spots_data
 spots.each do |spot_data|
@@ -111,8 +112,8 @@ spots.each do |spot_data|
 end
 
 # demo spot excluded
-excluded_spot_id = [spot1.id, spot2.id]
-other_spots_id = Spot.where.not(id: excluded_spot_id).pluck(:id)
+# excluded_spot_id = [spot1.id, spot2.id]
+# other_spots_id = Spot.where.not(id: excluded_spot_id).pluck(:id)
 
 puts "Creating participations to actions... "
 
@@ -125,20 +126,20 @@ participation1 = Participation.create!(
   created_at: Date.today
 )
 
-participation2 = Participation.create!(
-  action_type_id: action3.id,
-  user_id: User.pluck(:id).sample,
-  upvotes: rand(1..10),
-  spot_id: spot2.id,
-  created_at: Date.today
-)
+# participation2 = Participation.create!(
+#   action_type_id: action3.id,
+#   user_id: User.pluck(:id).sample,
+#   upvotes: rand(1..10),
+#   spot_id: spot2.id,
+#   created_at: Date.today
+# )
 
 300.times do
   p Participation.create!(
     action_type_id: ActionType.pluck(:id).sample,
     user_id: User.pluck(:id).sample,
     upvotes: rand(1..10),
-    spot_id: other_spot_ids.sample,
+    spot_id: Spot.pluck(:id).sample,
     created_at: rand(15.days).seconds.ago
   )
 end
