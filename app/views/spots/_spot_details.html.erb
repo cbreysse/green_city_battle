@@ -1,10 +1,10 @@
 <div class="overlay" data-map-target="spotDetailsContent" data-controller="spot-details">
-  <div class="d-flex justify-content-end w-100">
-    <button class="btn-close" data-action="click->spot-details#closeOverlay"></button>
+  <div class="d-flex justify-content-end w-100 pt-3 px-3">
+    <button class="btn-close btn-close-white" data-action="click->spot-details#closeOverlay"></button>
   </div>
-  <h2><%= address_formatter spot.address %></h2>
-  <% if spot.photo.key? %>
-    <%= cl_image_tag spot.photo.key, width: 300, height: 160, crop: :fill %>
+  <h2 class="p-3"><%= address_formatter spot.address %></h2>
+  <% if spot.photo.attached? %>
+    <%= cl_image_tag spot.photo.key, height: 160, class: "spot-img" %>
   <% else %>
     <%= image_tag "spot_default.jpeg", width: "120%", height: 160 %>
   <% end %>
