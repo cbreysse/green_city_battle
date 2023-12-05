@@ -1,22 +1,24 @@
 <div class="container mt-4">
   <div class="text-center mt-4 p-3 align-items-center justify-content-center">
     <h2><%= @event_type.name %> </h2>
+    <h5><%= @event.spot.team.name %></h5>
       <div class="mt-4">
         <% if @current_user_is_participating %>
           Bravo tu es inscrit à cet event!
         <% else %>
-          <%= link_to "Je participe", spot_participations_path(@event.spot, participation: { event_id: @event.id}), class: "pill-button btn btn-success", data: { turbo_method: :post } %>
+          <%= link_to "Participer !", spot_participations_path(@event.spot, participation: { event_id: @event.id}), class: "pill-button btn btn-success btn-sm", data: { turbo_method: :post } %>
         <% end %>
       </div>
   </div>
   <p class="my-3 text-center">**********************************************</p>
   <div class="row">
-    <div class="col-12 d-flex justify-content-center align-items-start p-4">
-        <div class="col-6 text-align-center gap-4">
+    <div class="d-flex justify-content-center align-items-start gap-4">
+        <div class="col-6 text-center mx-auto">
           <%= image_tag("trophy_pixel.png", width: 80, height: 80, crop: :fill) %>
-          <h3 class ="mt-4"><%= @event_type.points %>pts</h3>
+          <h4 class ="mt-4"><%= @event_type.points %> pts</h4>
+          <p> à gagner </p>
         </div>
-        <div class= "text-center">
+        <div class= "col-6 text-center mx-auto">
           <%= image_tag("user_marker.png", width: 80, height: 80, crop: :fill) %>
           <h3  class ="mt-4"><%= "#{current_user.participations.count}" %></h3>
           <p>contributeurs</p>
@@ -25,12 +27,12 @@
   </div>
   <p class="my-3 text-center">**********************************************</p>
     <div class ="row">
-      <h3>Adresse :</h3>
+      <h6>Adresse :</h6>
+        <p class= "m-8"><%= @event.spot.name %></p>
       <div style="width: 100%; height: 200px;"
-        data-controller="map"
-        data-map-markers-value="<%= @markers.to_json %>"
-        data-map-user-marker-value='<%=  %>'
-        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+        data-controller="mini-map"
+        data-mini-map-marker-value="<%= @marker.to_json %>"
+        data-mini-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
     </div>
   <p class="my-3 text-center">**********************************************</p>
   <div class="row">
@@ -39,7 +41,7 @@
       <div class="p-3">
         <h5 class="mt-4 text-center"></h5>
           <div class="justify-content-center align-items-center gap-5">
-            <p> Date : <%= @formatted_date %> </p>
+            <p> Rdv le : <%= @formatted_date %> </p>
             <p> Description : <%= @event.description %> </p>
           </div>
       </div>

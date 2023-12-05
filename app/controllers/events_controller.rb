@@ -4,8 +4,11 @@ class EventsController < ApplicationController
     @event_type = @event.event_type
     @formatted_date = @event.formatted_date
     @current_user_is_participating = @event.participations.find_by(user: current_user)
+    @spot = @event.spot
 
-    
+    @marker = {
+        lat: @spot.latitude,
+        lng: @spot.longitude,
+      }
   end
-
 end
