@@ -6,16 +6,10 @@ module ApplicationHelper
   end
 
   def participation_history(participation)
-    case participation.action_type.name
-    when "water spot"
-      return "#{participation.user.username} a arrosé  #{time_difference_in_days(participation.created_at)}"
-    when "care"
-      return "#{participation.user.username} a désherbé #{time_difference_in_days(participation.created_at)}"
-    when "plant"
-      "#{participation.user.username} a planté #{time_difference_in_days(participation.created_at)}"
-    when "denounce"
-      return "#{participation.user.team.name} vous a trash #{time_difference_in_days(participation.created_at)}!"
-    end
+    action_mapping = { "water spot" => "arrosé", "care" => "désherbé", "plant" => "planté", "denounce" => "trash" }
+    action_name = action_mapping[participation&.action_type&.name]
+    user_or_team_name = participation&.action_type&.name == "denounce" ? participation.user.team.name : participation.user.username
+    "#{user_or_team_name} a #{action_name} #{time_difference_in_days(participation&.created_at)}" if action_name
   end
 
   def time_difference_in_days(from_time, to_time = Time.now)
