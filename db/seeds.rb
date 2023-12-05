@@ -82,7 +82,9 @@ spot1 = Spot.create!(
   team_id: team1.id,
   is_open: true
 )
-spot1.photo.attach(io: URI.open(cloudinary_url), filename: 'image.jpg')
+
+photo1 = File.open(Rails.root.join('app/assets/images/planter.png'))
+spot1.photo.attach(io: photo1, filename: "planter.jpg")
 
 spot2 = spot1 = Spot.create!(
   name: "Rue René Leynaud",
@@ -92,6 +94,8 @@ spot2 = spot1 = Spot.create!(
   team_id: team1.id,
   is_open: true
 )
+
+
 
 spots = Rails.env == "development" ? spots_data.first(10) : spots_data
 spots.each do |spot_data|

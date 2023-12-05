@@ -4,7 +4,6 @@
   min-height: 100vh;
   background-color: $light-gray;
   border-radius: 16px 16px 0 0;
-  padding: 1rem;
   transform: translateY(50%);
   transition: all .25s ease-in-out;
   z-index: 2000;
@@ -19,8 +18,11 @@
     margin-bottom: 2rem;
   }
 
+  .spot-img {
+    width: 100%;
+  }
+  
   img {
-    margin: 0 -20px;
     object-fit: cover;
   }
 }
