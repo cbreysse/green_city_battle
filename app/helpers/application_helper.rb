@@ -6,6 +6,8 @@ module ApplicationHelper
   end
 
   def participation_history(participation)
+    return unless participation.action_type
+
     case participation.action_type.name
     when "water spot"
       return "#{participation.user.username} a arrosé  #{time_difference_in_days(participation.created_at)}"
