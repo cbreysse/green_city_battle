@@ -1,0 +1,19 @@
+<div class="container mt-4">
+  <div class="text-center mt-4 p-3 align-items-center justify-content-center">
+    <h2> Mes spots favoris </h2>
+
+  <p class="my-3 text-center">**********************************************</p>
+    <% if @favorite_spots.present? %>
+      <ul>
+        <% @favorite_spots.each do |spot| %>
+          <li>
+            <%= link_to spot.name, spot %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>Vous n'avez pas encore de spots favoris.</p>
+    <% end %>
+
+    <%= link_to 'Retour', root_path %>
+  <p class="my-3 text-center">**********************************************</p>

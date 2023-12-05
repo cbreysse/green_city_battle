@@ -8,5 +8,5 @@ class User < ApplicationRecord
   has_many :participations
   has_many :events, through: :participations
   has_many :favorite_spots
-  has_many :users, through: :favorite_spots
+  has_many :spots, through: :favorite_spots
 end

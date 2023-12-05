@@ -3,6 +3,11 @@
     <button class="btn-close" data-action="click->spot-details#closeOverlay"></button>
   </div>
   <h2><%= address_formatter spot.address %></h2>
+
+  <%= render "heart", spot: @spot %>
+  <%= form_with url: spot_favorite_spots_path(@spot)  do |f| %>
+  <% end %>
+
   <% if spot.photo.key? %>
     <%= cl_image_tag spot.photo.key, width: 300, height: 160, crop: :fill %>
   <% else %>
