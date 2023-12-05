@@ -1,10 +1,49 @@
 <div class="container mt-5">
-  <div class="pt-4 d-flex gap-4 justify-content-center align-items-baseline">
-    <%= image_tag "user_marker.png", height: 60, width: 60 %>
-    <h2><%= current_user.username %></h2>
-  </div>
+    <% if user_signed_in? %>
+      <div class="pt-4 d-flex gap-4 justify-content-center align-items-baseline">
+        <%= image_tag "user_marker.png", height: 60, width: 60 %>
+        <h2><%= current_user.username %></h2>
+      </div>
+    <% else %>
+      <div class="pt-4 d-flex gap-4 justify-content-center align-items-end">
+        <%= image_tag "user_marker.png", height: 60, width: 60 %>
+        <%= link_to "Connexion", new_user_session_path, class: "border px-4 py-2 round" %>
+      </div>
+    <% end %>
   <%= render "shared/divider" %>
   <div class="container mx-2">
+    <p>Bienvenue dans <strong>Clash of Green</strong>, où chaque action écologique compte dans la compétition pour créer des quartiers plus verts.</p>
     <h3>Règles du jeu</h3>
+    <p>Vous appartenez à une équipe : celle de votre arrondissement.</p>
+    <p>Réalisez des actions dans votre quartier pour faire gagner des points à votre quartier.</p>
+    <h4 class="fs-6">Actions Régulières</h4>
+    <ol>
+      <li>
+        Tâches d'Entretien sur les points de la carte
+        <ul>
+          <li><strong>Arroser</strong> (+10pts) gagnez 10 points à chaque session d'arrosage</li>
+          <li><strong>Désherber</strong> (+10pts) remportez 10 points à chaque fois que vous prenez soin d’un spot</li>
+        </ul>
+      </li>
+      <li>
+        Tâche de Plantation
+        <ul>
+          <li><strong>Planter</strong> (+20pts) (Re)plantez dans un spot existant et gagnez 20 points pour chaque plantation</li>
+        </ul>
+      </li>
+      <li>
+        Tâche de Dénonciation
+        <ul>
+          <li><strong>Dénoncer</strong> (-10pts pour l'équipe dénoncée) Soyez vigilant et signalez une plantation morte dans le quartier concurrent pour infliger une perte de 10 points à leur équipe</li>
+        </ul>
+      </li>
+    </ol>
+    <h4 class="fs-6">Raids</h4>
+    <p>Boostez les points de votre équipe en déclenchant ces actions collaboratives!</p>
+    <ul>
+      <li>
+        <strong>Nouvelle Oasis</strong> (+100pts) déclenchez la création d’un nouveau spot : faites une demande à la mairie via l’app
+      </li>
+    </ul>
   </div>
 </div>
