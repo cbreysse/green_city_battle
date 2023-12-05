@@ -98,6 +98,33 @@ spot2 = Spot.create!(
 photo2 = File.open(Rails.root.join('app/assets/images/flower_bed.png'))
 spot2.photo.attach(io: photo2, filename: "flower_bed.jpg")
 
+new_spot1 = Spot.create!(
+  name: "Place Chardonnet",
+  latitude: 45.7708912,
+  longitude: 4.834146,
+  spot_type: "Végétalisation mixte",
+  team_id: team1.id,
+  is_open: false
+)
+
+new_spot2 = Spot.create!(
+  name: "Quai Saint Vincent",
+  latitude: 45.7684365,
+  longitude: 4.8244804,
+  spot_type: "Végétalisation mixte",
+  team_id: team1.id,
+  is_open: false
+)
+
+new_spot3 = Spot.create!(
+  name: "Place Louis Chazette",
+  latitude: 45.7734161,
+  longitude: 4.8376788,
+  spot_type: "Végétalisation mixte",
+  team_id: team1.id,
+  is_open: false
+)
+
 spots = Rails.env == "development" ? spots_data.first(10) : spots_data
 spots.each do |spot_data|
   random_team = teams.sample.id
@@ -110,6 +137,8 @@ spots.each do |spot_data|
     is_open: true
   )
 end
+
+excluded_spot_ids = [spot1.id, spot2.id, new_spot1.id, new_spot2.id, new_spot3.id]
 
 puts "Creating participations to actions... "
 
@@ -130,7 +159,6 @@ participation2 = Participation.create!(
   created_at: Date.today
 )
 
-excluded_spot_ids = [spot1.id, spot2.id]
 
 300.times do
   p Participation.create!(
