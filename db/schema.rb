@@ -100,7 +100,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_05_104021) do
     t.datetime "updated_at", null: false
     t.bigint "team_id", null: false
     t.boolean "is_open", default: true, null: false
-    t.boolean "is_dry"
     t.index ["team_id"], name: "index_spots_on_team_id"
   end
 
