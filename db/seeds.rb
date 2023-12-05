@@ -111,10 +111,6 @@ spots.each do |spot_data|
   )
 end
 
-# demo spot excluded
-# excluded_spot_id = [spot1.id, spot2.id]
-# other_spots_id = Spot.where.not(id: excluded_spot_id).pluck(:id)
-
 puts "Creating participations to actions... "
 
 ## demo participation
@@ -126,20 +122,22 @@ participation1 = Participation.create!(
   created_at: Date.today
 )
 
-# participation2 = Participation.create!(
-#   action_type_id: action3.id,
-#   user_id: User.pluck(:id).sample,
-#   upvotes: rand(1..10),
-#   spot_id: spot2.id,
-#   created_at: Date.today
-# )
+participation2 = Participation.create!(
+  action_type_id: action3.id,
+  user_id: User.pluck(:id).sample,
+  upvotes: rand(1..10),
+  spot_id: spot2.id,
+  created_at: Date.today
+)
+
+excluded_spot_ids = [spot1.id, spot2.id]
 
 300.times do
   p Participation.create!(
     action_type_id: ActionType.pluck(:id).sample,
     user_id: User.pluck(:id).sample,
     upvotes: rand(1..10),
-    spot_id: Spot.pluck(:id).sample,
+    spot: Spot.where.not(id: excluded_spot_ids).sample,
     created_at: rand(15.days).seconds.ago
   )
 end
