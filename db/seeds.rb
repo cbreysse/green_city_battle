@@ -28,7 +28,7 @@ main_user = User.create!(
   email: "test@test.com",
   password: "123456",
   address: "20 Rue des Capucins, 69001 Lyon",
-  username: "JeanRacine",
+  username: "Jean Racine",
   team: team1
 )
 puts "Main user's email is #{main_user.email}"
