@@ -1,0 +1,14 @@
+.event-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid $light-beige;
+  border-radius: 2px;
+  padding: .5rem 2rem;
+  margin: 0 2rem;
+  margin-bottom: 1rem;
+
+  p {
+    margin: 0;
+  }
+}
