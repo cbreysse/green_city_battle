@@ -21,9 +21,21 @@ team9 = Team.create!(name: "Team Lyon 9")
 
 teams = [team1, team2, team3, team4, team5, team6, team7, team8, team9]
 
+## demo user
+puts "Creating main user..."
+
+main_user = User.create!(
+  email: "test@test.com",
+  password: "123456",
+  address: "20 Rue des Capucins, 69001 Lyon",
+  username: "JeanRacine",
+  team: team1
+)
+puts "Main user's email is #{main_user.email}"
+
 puts "Creating users..."
 
-addresses = ["20 Rue des Capucins, 69001 Lyon", "85 Cours Albert Thomas, 69003, Lyon", "5 Place Saint-Jean, 69005, Lyon", "251 Rue Paul Bert, 69003, Lyon,", "3 Place Bertone, 69004, Lyon", "48 Rue Henon, 69004, Lyon", "11 Place du Marechal Lyautey, 69006, Lyon", "32 Rue de Marseille, 69007, Lyon", "19 Rue Royale, 69001, Lyon", "8 Rue de la Navigation, 69009, Lyon", "21 Quai Victor Augagneur, 69003, Lyon", "33 Avenue Jean Jaures, 69007, Lyon", "11 Boulevard Marius Vivier Merle, 69003, Lyon", "40 Rue de l'Abondance, 69003, Lyon", "16 Quai de Bondy, 69005, Lyon",]
+addresses = ["85 Cours Albert Thomas, 69003, Lyon", "5 Place Saint-Jean, 69005, Lyon", "251 Rue Paul Bert, 69003, Lyon,", "3 Place Bertone, 69004, Lyon", "48 Rue Henon, 69004, Lyon", "11 Place du Marechal Lyautey, 69006, Lyon", "32 Rue de Marseille, 69007, Lyon", "19 Rue Royale, 69001, Lyon", "8 Rue de la Navigation, 69009, Lyon", "21 Quai Victor Augagneur, 69003, Lyon", "33 Avenue Jean Jaures, 69007, Lyon", "11 Boulevard Marius Vivier Merle, 69003, Lyon", "40 Rue de l'Abondance, 69003, Lyon", "16 Quai de Bondy, 69005, Lyon",]
 
 addresses.each_with_index do |address, i|
   counter = i + 1
@@ -61,6 +73,31 @@ document = File.read(filepath)
 response = JSON.parse(document)
 spots_data = response["features"]
 
+## demo spot
+spot1 = Spot.create!(
+  name: "Rue de l'Abbé Rozier",
+  latitude: 45.7696049,
+  longitude: 4.8339815,
+  spot_type: "Végétalisation mixte",
+  team_id: team1.id,
+  is_open: true
+)
+
+photo1 = File.open(Rails.root.join('app/assets/images/planter.png'))
+spot1.photo.attach(io: photo1, filename: "planter.jpg")
+
+spot2 = Spot.create!(
+  name: "Rue René Leynaud",
+  latitude: 45.7698596,
+  longitude: 4.8338336,
+  spot_type: "Végétalisation mixte",
+  team_id: team1.id,
+  is_open: true
+)
+
+photo2 = File.open(Rails.root.join('app/assets/images/flower_bed.png'))
+spot2.photo.attach(io: photo2, filename: "flower_bed.jpg")
+
 spots = Rails.env == "development" ? spots_data.first(10) : spots_data
 spots.each do |spot_data|
   random_team = teams.sample.id
@@ -76,12 +113,31 @@ end
 
 puts "Creating participations to actions... "
 
+## demo participation
+participation1 = Participation.create!(
+  action_type_id: action4.id,
+  user_id: User.pluck(:id).sample,
+  upvotes: rand(1..10),
+  spot_id: spot1.id,
+  created_at: Date.today
+)
+
+participation2 = Participation.create!(
+  action_type_id: action3.id,
+  user_id: User.pluck(:id).sample,
+  upvotes: rand(1..10),
+  spot_id: spot2.id,
+  created_at: Date.today
+)
+
+excluded_spot_ids = [spot1.id, spot2.id]
+
 300.times do
   p Participation.create!(
     action_type_id: ActionType.pluck(:id).sample,
     user_id: User.pluck(:id).sample,
     upvotes: rand(1..10),
-    spot_id: Spot.pluck(:id).sample,
+    spot: Spot.where.not(id: excluded_spot_ids).sample,
     created_at: rand(15.days).seconds.ago
   )
 end

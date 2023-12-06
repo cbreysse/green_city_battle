@@ -6,15 +6,13 @@
     <%= link_to favorite_spots_path do %>
       <%= image_tag('heart.svg', alt: 'Favorites Icon', class: 'rem-icon-size') %>
     <% end %>
-    <%= link_to "/", class: "square-btn btn-relief" do %>
-      <span class="plus-sign">+</span>
-    <% end %>
+    <%= render "shared/plus_btn" %>
     <% team_link = user_signed_in? ? team_path(current_user.team) : new_user_session_path %>
     <%= link_to team_link do %>
       <%= image_tag('user-group.svg', alt: 'Team Icon', class: 'rem-icon-size') %>
     <% end %>
-    <%= link_to "/" do %>
-      <%= image_tag('adjustments-horizontal.svg', alt: 'Map Icon', class: 'rem-icon-size') %>
+    <%= link_to info_path do %>
+      <%= image_tag('question.svg', alt: 'Info Icon', class: 'rem-icon-size') %>
     <% end %>
   </div>
 </div>
