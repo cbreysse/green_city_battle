@@ -64,13 +64,6 @@ action4 = ActionType.create!(name: "denounce", points: -10)
 
 p actions = [action1, action2, action3, action4]
 
-# weights = {
-#   action1.id => 20,
-#   action2.id => 1,
-#   action3.id => 1,
-#   action4.id => 1
-# }
-
 puts "Actions created!"
 
 puts "Creating spots..."
@@ -138,8 +131,8 @@ new_spot2 = Spot.create!(
 
 excluded_spot_ids = [spot1.id, spot2.id, spot3.id, new_spot1.id, new_spot2.id]
 
-# spots = Rails.env == "development" ? spots_data.first(10) : spots_data
-spots = spots_data
+spots = Rails.env == "development" ? spots_data.first(10) : spots_data
+# spots = spots_data
 
 spots.each do |spot_data|
   random_team = teams.sample.id
@@ -203,8 +196,6 @@ participation1 = Participation.create!(
   participation_created_at = rand(3.days).seconds.ago
   next if participation_created_at < 3.days.ago || participation_created_at > Time.current
 
-  # action_type_id = weights.max_by { |id, weight| rand ** (1.0 / weight) }.first
-
   p Participation.create!(
     action_type_id: ActionType.pluck(:id).sample,
     user_id: User.pluck(:id).sample,
@@ -247,13 +238,17 @@ end
 puts "Event participations created!"
 
 Spot.all.each do |spot|
-  if rand(2) == 0 && spot.participations.where(action_type_id: action1.id).where('created_at >= ?', 3.days.ago).empty?
+  next if spot == spot1
+  next if spot == spot2
+  next if spot == spot3
+
+  if rand(2) == 0 && spot.participations.where(action_type_id: action1.id).where('created_at >= ?', 1.days.ago).empty?
     Participation.create!(
       action_type_id: action1.id,
       user_id: User.pluck(:id).sample,
       upvotes: rand(1..10),
       spot_id: spot.id,
-      created_at: Time.zone.now
+      created_at: Date.today
     )
   end
 end
