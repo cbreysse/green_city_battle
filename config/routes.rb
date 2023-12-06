@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   resources :teams, only: [:show]
 
   get 'time_until_next_action', to: 'participations#time_until_next_action'
+  get 'info', to: 'pages#info'
 end
