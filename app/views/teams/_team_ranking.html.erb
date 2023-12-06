@@ -5,8 +5,13 @@
         <div class="d-flex justify-content-between gap-2">
           <p><%= team[1] %>pts</p>
           <p>
-            <span class="red-downward-triangle">&#9650;</span>
-            <span class="green-upward-triangle">&#9660;</span>
+            <% if rand(2) == 0 %>
+            <span class="red-downward-triangle">&#9660;</span>
+            <span class="green-upward-triangle" style="display: none;">&#9650;</span>
+          <% else %>
+            <span class="red-downward-triangle" style="display: none;">&#9660;</span>
+            <span class="green-upward-triangle">&#9650;</span>
+          <% end %>
           </p>
         </div>
       </li>
