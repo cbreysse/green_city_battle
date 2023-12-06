@@ -2,11 +2,13 @@
   <div class="d-flex justify-content-end w-100">
     <button class="btn-close" data-action="click->spot-details#closeOverlay"></button>
   </div>
-  <h2><%= address_formatter spot.address %></h2>
+  <div class="d-flex gap-4">
+    <h2><%= address_formatter spot.address %></h2>
 
-  <%= render "heart", spot: @spot %>
-  <%= form_with url: spot_favorite_spots_path(@spot)  do |f| %>
-  <% end %>
+    <%= render "heart", spot: @spot %>
+    <%= form_with url: spot_favorite_spots_path(@spot)  do |f| %>
+    <% end %>
+  </div>
 
   <% if spot.photo.key? %>
     <%= cl_image_tag spot.photo.key, width: 300, height: 160, crop: :fill %>
