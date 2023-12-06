@@ -224,7 +224,6 @@ event_types = [event_type1, event_type2, event_type3]
     description: "blabla",
     event_type_id: EventType.pluck(:id).sample
   )
-  100.times do
     p Participation.create!(
       event_id: new_event.id,
       user_id: User.pluck(:id).sample,
@@ -232,7 +231,6 @@ event_types = [event_type1, event_type2, event_type3]
       spot_id: Spot.pluck(:id).sample,
       created_at: occurs_at
     )
-  end
 end
 
 puts "Event participations created!"
