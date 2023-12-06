@@ -233,6 +233,17 @@ event_types = [event_type1, event_type2, event_type3]
     )
 end
 
+[spot2, spot3].each do |spot|
+  random_days = rand(-7..7)
+  occurs_at = random_days.days.from_now
+  new_event = Event.create!(
+    spot_id: Spot.pluck(:id).sample,
+    occurs_at: occurs_at,
+    description: "Tous ensemble pour reverduriser de ouf la ville!",
+    event_type_id: EventType.pluck(:id).sample
+  )
+end
+
 puts "Event participations created!"
 
 Spot.all.each do |spot|
