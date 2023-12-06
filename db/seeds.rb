@@ -117,50 +117,15 @@ new_spot2 = Spot.create!(
   is_open: false
 )
 
-new_spot3 = Spot.create!(
-  name: "Place Louis Chazette",
-  latitude: 45.7734161,
-  longitude: 4.8376788,
-  spot_type: "Végétalisation mixte",
-  team_id: team1.id,
-  is_open: false
-)
-
-## new spot elsewhere
-# new_spot4 = Spot.create!(
-#   name: "Place Gailleton",
-#   latitude: 45.7535452,
-#   longitude: 4.8327382,
-#   spot_type: "Végétalisation mixte",
-#   team_id: team1.id,
-#   is_open: false
-# )
-
-# new_spot5 = Spot.create!(
-#   name: "Montée du Télégraphe",
-#   latitude: 45.7579594,
-#   longitude: 4.8170384,
-#   spot_type: "Végétalisation mixte",
-#   team_id: team1.id,
-#   is_open: false
-# )
-
-# new_spot6 = Spot.create!(
-#   name: "Montée de l'Observance",
-#   latitude: 45.7690504,
-#   longitude: 4.81029,
-#   spot_type: "Végétalisation mixte",
-#   team_id: team1.id,
-#   is_open: false
-# )
-
 excluded_spot_ids = [spot1.id, spot2.id, new_spot1.id, new_spot2.id, new_spot3.id]
 
-spots = Rails.env == "development" ? spots_data.first(10) : spots_data
+# spots = Rails.env == "development" ? spots_data.first(10) : spots_data
+spots = spots_data
+
 spots.each do |spot_data|
   random_team = teams.sample.id
   is_open_probability = rand(100)
-  is_open = is_open_probability < 5
+  is_open = is_open_probability < 95
   p Spot.create!(
     name: spot_data["properties"]["Name"],
     latitude: spot_data["properties"]["Lat"],
@@ -221,12 +186,14 @@ event_types = [event_type1, event_type2, event_type3]
 end
 
 50.times do
+  past_or_future_days = rand(-20..7)
+  random_created_at = past_or_future_days.days.seconds.ago
   p Participation.create!(
     event_id: Event.pluck(:id).sample,
     user_id: User.pluck(:id).sample,
     upvotes: rand(1..10),
     spot_id: Spot.pluck(:id).sample,
-    created_at: rand(30.days).seconds.ago,
+    created_at: random_created_at
   )
 end
 
