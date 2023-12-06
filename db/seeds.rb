@@ -138,8 +138,8 @@ new_spot2 = Spot.create!(
 
 excluded_spot_ids = [spot1.id, spot2.id, spot3.id, new_spot1.id, new_spot2.id]
 
-# spots = Rails.env == "development" ? spots_data.first(10) : spots_data
-spots = spots_data
+spots = Rails.env == "development" ? spots_data.first(10) : spots_data
+# spots = spots_data
 
 spots.each do |spot_data|
   random_team = teams.sample.id
@@ -218,9 +218,9 @@ puts "Participations created!"
 
 puts "Creating events..."
 
-event_type1 = EventType.create!(name: "Nouvelle oasis", points: 100)
-event_type2 = EventType.create!(name: "Green bombing", points: 200)
-event_type3 = EventType.create!(name: "Green raid", points: 300)
+event_type1 = EventType.create!(name: "Nouvelle Oasis", points: 100)
+event_type2 = EventType.create!(name: "Green Bombing", points: 200)
+event_type3 = EventType.create!(name: "Green Raid", points: 300)
 
 event_types = [event_type1, event_type2, event_type3]
 
