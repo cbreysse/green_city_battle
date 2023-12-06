@@ -1,5 +1,7 @@
 <div class="container">
   <h4>Raids à venir</h4>
-  <%= render "shared/event_card" %>
+  <% @upcoming_events.each do %>
+    <%= render "shared/event_card" %>
+  <% end %>
   <h4>Raids passés</h4>
 </div>
