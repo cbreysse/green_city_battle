@@ -127,48 +127,49 @@ new_spot3 = Spot.create!(
 )
 
 ## new spot elsewhere
-new_spot4 = Spot.create!(
-  name: "Place Gailleton",
-  latitude: 45.7535452,
-  longitude: 4.8327382,
-  spot_type: "Végétalisation mixte",
-  team_id: team1.id,
-  is_open: false
-)
+# new_spot4 = Spot.create!(
+#   name: "Place Gailleton",
+#   latitude: 45.7535452,
+#   longitude: 4.8327382,
+#   spot_type: "Végétalisation mixte",
+#   team_id: team1.id,
+#   is_open: false
+# )
 
-new_spot5 = Spot.create!(
-  name: "Montée du Télégraphe",
-  latitude: 45.7579594,
-  longitude: 4.8170384,
-  spot_type: "Végétalisation mixte",
-  team_id: team1.id,
-  is_open: false
-)
+# new_spot5 = Spot.create!(
+#   name: "Montée du Télégraphe",
+#   latitude: 45.7579594,
+#   longitude: 4.8170384,
+#   spot_type: "Végétalisation mixte",
+#   team_id: team1.id,
+#   is_open: false
+# )
 
-new_spot6 = Spot.create!(
-  name: "Montée de l'Observance",
-  latitude: 45.7690504,
-  longitude: 4.81029,
-  spot_type: "Végétalisation mixte",
-  team_id: team1.id,
-  is_open: false
-)
+# new_spot6 = Spot.create!(
+#   name: "Montée de l'Observance",
+#   latitude: 45.7690504,
+#   longitude: 4.81029,
+#   spot_type: "Végétalisation mixte",
+#   team_id: team1.id,
+#   is_open: false
+# )
 
-excluded_spot_ids = [spot1.id, spot2.id, new_spot1.id, new_spot2.id, new_spot3.id, new_spot4.id, new_spot5.id, new_spot6.id]
+excluded_spot_ids = [spot1.id, spot2.id, new_spot1.id, new_spot2.id, new_spot3.id]
 
 spots = Rails.env == "development" ? spots_data.first(10) : spots_data
 spots.each do |spot_data|
   random_team = teams.sample.id
+  is_open_probability = rand(100)
+  is_open = is_open_probability < 5
   p Spot.create!(
     name: spot_data["properties"]["Name"],
     latitude: spot_data["properties"]["Lat"],
     longitude: spot_data["properties"]["Lon"],
     spot_type: spot_data["properties"]["Type_de_V__g__talisation"],
     team_id: random_team,
-    is_open: true
+    is_open: is_open
   )
 end
-
 
 puts "Creating participations to actions... "
 
