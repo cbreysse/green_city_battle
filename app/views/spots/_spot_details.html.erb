@@ -4,10 +4,10 @@
   </div>
   <div class="overflow-scroll">
     <div class="d-flex gap-4">
-    <h2 class="p-3"><%= address_formatter spot.address %></h2>
+      <h2 class="p-3"><%= address_formatter spot.address %></h2>
       <%= render "heart", spot: @spot %>
-  </div>
-  <% if spot.photo.attached? %>
+    </div>
+    <% if spot.photo.attached? %>
       <%= cl_image_tag spot.photo.key, height: 160, class: "spot-img" %>
     <% else %>
       <%= image_tag "spot_default.jpeg", width: "120%", height: 160 %>

@@ -1,0 +1,8 @@
+<div class="favorite-card">
+  <p><%= spot.name %></p>
+  <% if spot.photo.attached? %>
+    <%= cl_image_tag spot.photo.key, widht: "auto", height: 50, crop: :fill %>
+  <% else %>
+    <%= image_tag "spot_default.jpeg", width: "auto", height: 50 %>
+  <% end %>
+</div>

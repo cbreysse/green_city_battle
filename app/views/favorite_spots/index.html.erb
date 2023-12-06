@@ -2,19 +2,14 @@
   <div class="text-center mt-4 p-3 align-items-center justify-content-center">
     <h2> Mes spots favoris </h2>
   </div>
-  <p class="my-3 text-center">**********************************************</p>
+  <%= render "shared/divider" %>
     <% if @favorite_spots.present? %>
-      <ul>
+      <div class="d-flex flex-column gap-4">
         <% @favorite_spots.each do |spot| %>
-          <li>
-            <%= link_to spot.name, spot %>
-  <p class="my-3 text-center">**********************************************</p>
-          </li>
+          <%= render "favorite", spot: spot %>
         <% end %>
-      </ul>
+      </div>
     <% else %>
       <p>Vous n'avez pas encore de spots favoris.</p>
     <% end %>
-
-    <%= link_to 'Retour', root_path %>
 </div>
