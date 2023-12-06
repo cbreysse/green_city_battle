@@ -1,16 +1,22 @@
   <ul class="list-group m-3">
-    <% teams.each do |team| %>
+    <% teams.each_with_index do |team, i| %>
       <li class="d-flex justify-content-between align-items-center">
         <p class="<%= team[0] == current_user.team ? "fw-bold" : ""%>"><%= team[0].name %></p>
         <div class="d-flex justify-content-between gap-2">
-          <p><%= team[1] %>pts</p>
+          <p><%= team[1] %> pts</p>
           <p>
-            <% if rand(2) == 0 %>
-            <span class="red-downward-triangle">&#9660;</span>
-            <span class="green-upward-triangle" style="display: none;">&#9650;</span>
-          <% else %>
-            <span class="red-downward-triangle" style="display: none;">&#9660;</span>
+            <% if i == 0 %>
             <span class="green-upward-triangle">&#9650;</span>
+          <% elsif i == teams.length - 1 %>
+            <span class="red-downward-triangle">&#9660;</span>
+          <% else %>
+            <% if rand(2) == 0 %>
+              <span class="red-downward-triangle">&#9660;</span>
+              <span class="green-upward-triangle" style="display: none;">&#9650;</span>
+            <% else %>
+              <span class="red-downward-triangle" style="display: none;">&#9660;</span>
+              <span class="green-upward-triangle">&#9650;</span>
+            <% end %>
           <% end %>
           </p>
         </div>
