@@ -131,8 +131,8 @@ new_spot2 = Spot.create!(
 
 excluded_spot_ids = [spot1.id, spot2.id, spot3.id, new_spot1.id, new_spot2.id]
 
-# spots = Rails.env == "development" ? spots_data.first(10) : spots_data
-spots = spots_data
+spots = Rails.env == "development" ? spots_data.first(10) : spots_data
+# spots = spots_data
 
 spots.each do |spot_data|
   random_team = teams.sample.id
@@ -242,7 +242,11 @@ Spot.all.each do |spot|
   next if spot == spot2
   next if spot == spot3
 
-  if rand(2) == 0 && spot.participations.where(action_type_id: action1.id).where('created_at >= ?', 1.days.ago).empty?
+  water_chance = rand(100)
+  proba = 90
+  chance = water_chance < proba
+
+  if chance && spot.participations.where(action_type_id: action1.id).where('created_at >= ?', 1.days.ago).empty?
     Participation.create!(
       action_type_id: action1.id,
       user_id: User.pluck(:id).sample,
