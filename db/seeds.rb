@@ -65,7 +65,7 @@ action4 = ActionType.create!(name: "denounce", points: -10)
 p actions = [action1, action2, action3, action4]
 
 weights = {
-  action1.id => 10,
+  action1.id => 20,
   action2.id => 1,
   action3.id => 1,
   action4.id => 1
