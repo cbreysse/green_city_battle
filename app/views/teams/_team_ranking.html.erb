@@ -4,9 +4,18 @@
         <p class="<%= team[0] == current_user.team ? "fw-bold" : ""%>"><%= team[0].name %></p>
         <div class="d-flex justify-content-between gap-2">
           <p><%= team[1] %>pts</p>
-          <p><%= "🔺🔻" %></p> <%# TODO: add logic for arrows %>
+          <p>
+            <% if rand(2) == 0 %>
+            <span class="red-downward-triangle">&#9660;</span>
+            <span class="green-upward-triangle" style="display: none;">&#9650;</span>
+          <% else %>
+            <span class="red-downward-triangle" style="display: none;">&#9660;</span>
+            <span class="green-upward-triangle">&#9650;</span>
+          <% end %>
+          </p>
         </div>
       </li>
     <% end %>
   </ul>
 </div>
+<i image_tag ="fa-sharp fa-solid fa-caret-up"></i>
