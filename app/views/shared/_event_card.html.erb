@@ -1,0 +1,17 @@
+<div class="event-card">
+  <div class="d-flex flex-column justify-content-center align-items-start">
+    <p><strong><%= event.event_type.name %></strong></p>
+    <p style="font-size: .75rem;"><%= event.occurs_at.strftime("le %d.%m à %Hh%M") %></p>
+  </div>
+  <% case event.event_type.name %>
+  <% when "Nouvelle Oasis" %>
+    <% img = "planting.png" %>
+  <% when "Green Bombimg" %>
+    <% img = "plant.png" %>
+  <% when "Green Raid" %>
+    <% img = "plant_watering.png" %>
+  <% else %>
+    <% img = "planting.png" %>
+  <% end %>
+  <%= render "shared/badge", badge_img: img, badge_text: "", size: "width: 60px; height: 60px;" %>
+</div>
