@@ -7,8 +7,8 @@ class TeamsController < ApplicationController
     # An array of hashes with an instance of Team as key and the total points of that team as value
     @total_points_by_team = calculate_total_points_by_team(all_teams_participations).sort_by { |_team, points| points }.reverse.to_h
 
-    @upcoming_events = Event.where('occurs_at > ?', Time.now).order(occurs_at: :asc).limit(3)
-    @past_events = Event.where('occurs_at < ?', Time.now).order(occurs_at: :desc).limit(3)
+    @upcoming_events = Event.where('occurs_at > ?', Time.now).order(occurs_at: :asc).limit(3).filter { |e| e.spot.team == @team }
+    @past_events = Event.where('occurs_at < ?', Time.now).order(occurs_at: :desc).limit(3).filter { |e| e.spot.team == @team }
   end
 
   private
