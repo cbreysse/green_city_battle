@@ -1,28 +1,16 @@
 <div class="container mt-4">
   <h2 class="mt-4 p-3 text-center"><%= @team.name %></h2>
-  <p class="my-3 text-center">**********************************************</p>
+  <%= render "shared/divider" %>
   <div class="row">
     <div class="col-12 text-center mt-4">
       <h4>Général</h4>
       <div class= "d-flex justify-content-center align-item-baseline gap-2">
         <%= image_tag 'user_marker.png', height: 60, width: 60, alt: "user marker" %>
-        <h6 class="my-3"><%= @my_team_total_points %>pts | 🔺30pts</h6>
+        <h6 class="my-3"><%= @my_team_total_points %>pts</h6>
       </div>
     </div>
   </div>
-  <p class="my-3 text-center">**********************************************</p>
-  <div class="row">
-    <div class="col-12">
-      <div class="p-3">
-        <h5 class="mt-4 text-center">Détails</h5>
-        <div class="d-flex justify-content-center align-items-center gap-5">
-          <%= render "score_badge", score_badge_img: "plant.png", score_badge_alt: "plant", score: "X" %>
-          <%= render "score_badge", score_badge_img: "plant_dying.png", score_badge_alt: "plant_dying", score: "X" %>
-          <%= render "score_badge", score_badge_img: "raid.png", score_badge_alt: "raid", score: "X" %>
-        </div>
-      </div>
-    </div>
-    <p class="my-3 text-center">**********************************************</p>
+  <%= render "shared/divider" %>
     <div class="col-12 text-center">
       <div class="p-3 mt-4">
         <div id="ranking-chart">
