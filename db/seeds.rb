@@ -64,6 +64,13 @@ action4 = ActionType.create!(name: "denounce", points: -10)
 
 p actions = [action1, action2, action3, action4]
 
+weights = {
+  action1.id => 10,
+  action2.id => 1,
+  action3.id => 1,
+  action4.id => 1
+}
+
 puts "Actions created!"
 
 puts "Creating spots..."
@@ -131,8 +138,8 @@ new_spot2 = Spot.create!(
 
 excluded_spot_ids = [spot1.id, spot2.id, spot3.id, new_spot1.id, new_spot2.id]
 
-spots = Rails.env == "development" ? spots_data.first(10) : spots_data
-# spots = spots_data
+# spots = Rails.env == "development" ? spots_data.first(10) : spots_data
+spots = spots_data
 
 spots.each do |spot_data|
   random_team = teams.sample.id
@@ -196,8 +203,10 @@ participation1 = Participation.create!(
   participation_created_at = rand(3.days).seconds.ago
   next if participation_created_at < 3.days.ago || participation_created_at > Time.current
 
+  action_type_id = weights.max_by { |id, weight| rand ** (1.0 / weight) }.first
+
   p Participation.create!(
-    action_type_id: ActionType.pluck(:id).sample,
+    action_type_id: action_type_id,
     user_id: User.pluck(:id).sample,
     upvotes: rand(1..10),
     spot: Spot.where.not(id: excluded_spot_ids).sample,
