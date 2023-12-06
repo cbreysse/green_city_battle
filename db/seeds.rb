@@ -237,11 +237,12 @@ end
   random_days = rand(-7..7)
   occurs_at = random_days.days.from_now
   new_event = Event.create!(
-    spot_id: Spot.pluck(:id).sample,
+    spot_id: spot._id,
     occurs_at: occurs_at,
     description: "Tous ensemble pour reverduriser de ouf la ville!",
     event_type_id: EventType.pluck(:id).sample
   )
+
 end
 
 puts "Event participations created!"
