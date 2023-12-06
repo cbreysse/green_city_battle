@@ -203,10 +203,10 @@ participation1 = Participation.create!(
   participation_created_at = rand(3.days).seconds.ago
   next if participation_created_at < 3.days.ago || participation_created_at > Time.current
 
-  action_type_id = weights.max_by { |id, weight| rand ** (1.0 / weight) }.first
+  # action_type_id = weights.max_by { |id, weight| rand ** (1.0 / weight) }.first
 
   p Participation.create!(
-    action_type_id: action_type_id,
+    action_type_id: ActionType.pluck(:id).sample,
     user_id: User.pluck(:id).sample,
     upvotes: rand(1..10),
     spot: Spot.where.not(id: excluded_spot_ids).sample,
@@ -245,5 +245,17 @@ event_types = [event_type1, event_type2, event_type3]
 end
 
 puts "Event participations created!"
+
+Spot.all.each do |spot|
+  if rand(2) == 0 && spot.participations.where(action_type_id: action1.id).where('created_at >= ?', 3.days.ago).empty?
+    Participation.create!(
+      action_type_id: action1.id,
+      user_id: User.pluck(:id).sample,
+      upvotes: rand(1..10),
+      spot_id: spot.id,
+      created_at: Time.zone.now
+    )
+  end
+end
 
 puts "Finished!"
