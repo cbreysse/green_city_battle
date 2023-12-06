@@ -131,8 +131,8 @@ new_spot2 = Spot.create!(
 
 excluded_spot_ids = [spot1.id, spot2.id, spot3.id, new_spot1.id, new_spot2.id]
 
-spots = Rails.env == "development" ? spots_data.first(10) : spots_data
-# spots = spots_data
+# spots = Rails.env == "development" ? spots_data.first(10) : spots_data
+spots = spots_data
 
 spots.each do |spot_data|
   random_team = teams.sample.id
