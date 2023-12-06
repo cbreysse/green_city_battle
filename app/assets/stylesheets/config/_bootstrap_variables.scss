@@ -23,4 +23,13 @@ $border-radius:    2px;
 $border-radius-lg: 2px;
 $border-radius-sm: 2px;
 
-// Override other variables below!
+// Accordion
+$accordion-bg: $dark-purple;
+$accordion-color: $light-beige;
+$accordion-border-radius: 8px;
+$accordion-icon-color: $accordion-color;
+$accordion-button-color: $accordion-color;
+$accordion-button-active-bg: $accordion-bg;
+$accordion-button-active-color: $accordion-color;
+$accordion-button-focus-border-color: $accordion-color;
+$accordion-button-focus-box-shadow: $accordion-color;
