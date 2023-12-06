@@ -1,4 +1,15 @@
 .favorite-card {
   display: flex;
+  flex-direction: column;
+  gap: .5rem;
   border: 2px solid $light-beige;
+  border: 2px solid $light-beige;
+  border-radius: 2px;
+  padding: .5rem 1rem;
+  margin: 0 2rem;
+  margin-bottom: .5rem;
+
+  p {
+    margin: 0;
+  }
 }
