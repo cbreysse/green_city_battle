@@ -28,7 +28,7 @@ main_user = User.create!(
   email: "test@test.com",
   password: "123456",
   address: "20 Rue des Capucins, 69001 Lyon",
-  username: "JeanRacine",
+  username: "Jean Racine",
   team: team1
 )
 puts "Main user's email is #{main_user.email}"
@@ -75,16 +75,16 @@ spots_data = response["features"]
 
 ## demo spot
 spot1 = Spot.create!(
-  name: "Rue de l'Abbé Rozier",
-  latitude: 45.7696049,
-  longitude: 4.8339815,
+  name: "Rue des capucins",
+  latitude: 45.769482,
+  longitude: 4.834604,
   spot_type: "Végétalisation mixte",
   team_id: team1.id,
   is_open: true
 )
 
-photo1 = File.open(Rails.root.join('app/assets/images/planter.png'))
-spot1.photo.attach(io: photo1, filename: "planter.jpg")
+photo1 = File.open(Rails.root.join('app/assets/images/rue_capucins.jpg'))
+spot1.photo.attach(io: photo1, filename: "rue_capucins.jpg")
 
 spot2 = Spot.create!(
   name: "Rue René Leynaud",
@@ -98,30 +98,68 @@ spot2 = Spot.create!(
 photo2 = File.open(Rails.root.join('app/assets/images/flower_bed.png'))
 spot2.photo.attach(io: photo2, filename: "flower_bed.jpg")
 
+spot3 = Spot.create!(
+  name: "Rue de l'Abbé Rozier",
+  latitude: 45.7696049,
+  longitude: 4.8339815,
+  spot_type: "Végétalisation mixte",
+  team_id: team1.id,
+  is_open: true
+)
+
+photo3 = File.open(Rails.root.join('app/assets/images/planter.png'))
+spot3.photo.attach(io: photo3, filename: "planter.jpg")
+
+## new spot in Lyon 1
+new_spot1 = Spot.create!(
+  name: "Place Chardonnet",
+  latitude: 45.7708912,
+  longitude: 4.834146,
+  spot_type: "Végétalisation mixte",
+  team_id: team1.id,
+  is_open: false
+)
+
+new_spot2 = Spot.create!(
+  name: "Quai Saint Vincent",
+  latitude: 45.7684365,
+  longitude: 4.8244804,
+  spot_type: "Végétalisation mixte",
+  team_id: team1.id,
+  is_open: false
+)
+
+excluded_spot_ids = [spot1.id, spot2.id, spot3.id, new_spot1.id, new_spot2.id]
+
 spots = Rails.env == "development" ? spots_data.first(10) : spots_data
+# spots = spots_data
+
 spots.each do |spot_data|
   random_team = teams.sample.id
+  is_open_probability = rand(100)
+  is_open = is_open_probability < 95
   p Spot.create!(
     name: spot_data["properties"]["Name"],
     latitude: spot_data["properties"]["Lat"],
     longitude: spot_data["properties"]["Lon"],
     spot_type: spot_data["properties"]["Type_de_V__g__talisation"],
     team_id: random_team,
-    is_open: true
+    is_open: is_open
   )
 end
 
 puts "Creating participations to actions... "
 
-## demo participation
+## demo participation trash
 participation1 = Participation.create!(
-  action_type_id: action4.id,
+  action_type_id: action1.id,
   user_id: User.pluck(:id).sample,
   upvotes: rand(1..10),
-  spot_id: spot1.id,
+  spot_id: spot3.id,
   created_at: Date.today
 )
 
+## demo participation care
 participation2 = Participation.create!(
   action_type_id: action3.id,
   user_id: User.pluck(:id).sample,
@@ -130,15 +168,40 @@ participation2 = Participation.create!(
   created_at: Date.today
 )
 
-excluded_spot_ids = [spot1.id, spot2.id]
+participation3 = Participation.create!(
+  action_type_id: action2.id,
+  user_id: User.pluck(:id).sample,
+  upvotes: rand(1..10),
+  spot_id: spot2.id,
+  created_at: Date.today
+)
 
-300.times do
+participation4 = Participation.create!(
+  action_type_id: action1.id,
+  user_id: User.pluck(:id).sample,
+  upvotes: rand(1..10),
+  spot_id: spot2.id,
+  created_at: Date.today
+)
+
+participation1 = Participation.create!(
+  action_type_id: action4.id,
+  user_id: User.pluck(:id).sample,
+  upvotes: rand(1..10),
+  spot_id: spot1.id,
+  created_at: Date.today
+)
+
+200.times do
+  participation_created_at = rand(3.days).seconds.ago
+  next if participation_created_at < 3.days.ago || participation_created_at > Time.current
+
   p Participation.create!(
     action_type_id: ActionType.pluck(:id).sample,
     user_id: User.pluck(:id).sample,
     upvotes: rand(1..10),
     spot: Spot.where.not(id: excluded_spot_ids).sample,
-    created_at: rand(15.days).seconds.ago
+    created_at: participation_created_at
   )
 end
 
@@ -146,31 +209,52 @@ puts "Participations created!"
 
 puts "Creating events..."
 
-event_type1 = EventType.create!(name: "Nouvelle oasis", points: 100)
-event_type2 = EventType.create!(name: "Green bombing", points: 200)
-event_type3 = EventType.create!(name: "Green raid", points: 300)
+event_type1 = EventType.create!(name: "Nouvelle Oasis", points: 100)
+event_type2 = EventType.create!(name: "Green Bombing", points: 200)
+event_type3 = EventType.create!(name: "Green Raid", points: 300)
 
 event_types = [event_type1, event_type2, event_type3]
 
-100.times do
-  p Event.create!(
+50.times do
+  random_days = rand(-7..7)
+  occurs_at = random_days.days.from_now
+  new_event = Event.create!(
     spot_id: Spot.pluck(:id).sample,
-    occurs_at: rand(15.days).seconds.ago,
+    occurs_at: occurs_at,
     description: "blabla",
     event_type_id: EventType.pluck(:id).sample
   )
-end
-
-50.times do
-  p Participation.create!(
-    event_id: Event.pluck(:id).sample,
-    user_id: User.pluck(:id).sample,
-    upvotes: rand(1..10),
-    spot_id: Spot.pluck(:id).sample,
-    created_at: rand(30.days).seconds.ago,
-  )
+  100.times do
+    p Participation.create!(
+      event_id: new_event.id,
+      user_id: User.pluck(:id).sample,
+      upvotes: rand(1..10),
+      spot_id: Spot.pluck(:id).sample,
+      created_at: occurs_at
+    )
+  end
 end
 
 puts "Event participations created!"
+
+Spot.all.each do |spot|
+  next if spot == spot1
+  next if spot == spot2
+  next if spot == spot3
+
+  water_chance = rand(100)
+  proba = 90
+  chance = water_chance < proba
+
+  if chance && spot.participations.where(action_type_id: action1.id).where('created_at >= ?', 1.days.ago).empty?
+    Participation.create!(
+      action_type_id: action1.id,
+      user_id: User.pluck(:id).sample,
+      upvotes: rand(1..10),
+      spot_id: spot.id,
+      created_at: Date.today
+    )
+  end
+end
 
 puts "Finished!"
