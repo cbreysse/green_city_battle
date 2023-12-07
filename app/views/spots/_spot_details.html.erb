@@ -1,9 +1,14 @@
-<div class="overlay" data-map-target="spotDetailsContent" data-controller="spot-details">
+<div class="overlay" data-map-target="spotDetailsContent" data-overlay-target="spotDetailsContent" data-controller="spot-details">
   <div class="position-sticky top-0 d-flex justify-content-end w-100 pt-3 px-3">
     <button class="btn-close btn-close-white" data-action="click->spot-details#closeOverlay"></button>
   </div>
   <div class="overflow-scroll">
-    <h2 class="p-3"><%= address_formatter spot.address %></h2>
+    <div class="d-flex align-items-center gap-4">
+      <h2 class="p-3"><%= address_formatter spot.address %></h2>
+      <div class="pe-4 fs-3">
+        <%= render "heart", spot: @spot %>
+      </div>
+    </div>
     <% if spot.photo.attached? %>
       <%= cl_image_tag spot.photo.key, height: 160, class: "spot-img" %>
     <% else %>
