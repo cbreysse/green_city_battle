@@ -5,14 +5,17 @@ export default class extends Controller {
   static values = {
     spotId: Number,
     actionId: Number,
+    actionName: String
   }
 
   connect() {
-    fetch(`/time_until_next_action?spot_id=${this.spotIdValue}&action_id=${this.actionIdValue}`, {
-      headers: {
-        accept: "application/json",
-      }}).then(response => response.json())
-      .then(this.#setCountdown)
+    if (this.actionNameValue !== "denounce") {
+      fetch(`/time_until_next_action?spot_id=${this.spotIdValue}&action_id=${this.actionIdValue}`, {
+        headers: {
+          accept: "application/json",
+        }}).then(response => response.json())
+        .then(this.#setCountdown)
+    }
   }
 
   #setCountdown = (data) => {

@@ -36,7 +36,7 @@
       should_block: block_action(params[:id],action_id),
       spot_id: params[:id] do
     %>
-      <%= render "shared/badge", { badge_img: "plant_dying.png", badge_text: "Aïe, c'est mort !", badge_class: "mb-2", timer: true, spot_id: params[:id], action_id: action_id } %>
+      <%= render "shared/badge", { badge_img: "plant_dying.png", badge_text: "Aïe, c'est mort !", badge_class: "mb-2", timer: true, spot_id: params[:id], action_id: action_id, action_name: "denounce" } %>
     <% end %>
   </div>
 </div>
