@@ -1,6 +1,6 @@
 <div class="favorite-card gap-4" data-action="click->overlay#showSpotDetails" data-id="<%= spot.id %>">
   <div class="w-100 d-flex justify-content-between favorite-card-img">
-    <% if false #spot.photo.attached? %>
+    <% if false @spot.photo.attached? %>
       <%= cl_image_tag spot.photo.key, width: "100%", height: 150, crop: :fill %>
     <% else %>
       <%= image_tag "spot_default.jpeg", width: "100%", height: 150 %>
