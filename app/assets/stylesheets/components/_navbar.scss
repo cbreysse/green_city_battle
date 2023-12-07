@@ -65,16 +65,12 @@
   justify-content: center;
   align-items: center;
   background-color: $purple;
-  border-radius: 50%;
-  height: 110px;
-  width: 110px;
-  padding: 2px;
+  padding: 0 16px;
+  padding-top: 16px;
   border: 2px solid $light-gray;
 
   p {
-    margin: 0;
-    font-size: .65rem;
-    transform: translateY(-5px);
+    margin-top: .5rem;
   }
 }
 
