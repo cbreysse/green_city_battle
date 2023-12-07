@@ -2,7 +2,7 @@
   <div class="w-100 d-flex justify-content-between align-items-end">
     <p><%= spot.name %></p>
     <% if spot.photo.attached? %>
-      <%= cl_image_tag spot.photo.key, height: 100, crop: :fill %>
+      <%= cl_image_tag spot.photo.key, height: 100, width: 200, crop: :fill %>
     <% else %>
       <%= image_tag "spot_default.jpeg", width: "auto", height: 100 %>
     <% end %>
