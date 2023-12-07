@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <div class="participation-list">
     <% @last_participations.each do |participation| %>
-      <div class="participation-item mb-2" >
+      <div class="participation-item mb-2 d-flex" >
         <%= participation_history(participation) %>
       </div>
     <% end %>

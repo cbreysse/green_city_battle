@@ -1,4 +1,6 @@
 class FavoriteSpotsController < ApplicationController
+  include ActionIntervals
+
   before_action :authenticate_user!
   skip_before_action :verify_authenticity_token, only: [:create, :destroy]
 

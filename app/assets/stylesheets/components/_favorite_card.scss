@@ -10,15 +10,25 @@
     position: relative;
     object-fit: cover;
   }
+  .picto-dry-or-not{
+    display: flex;
 
-  p {
-    position: absolute;
-    margin: 0;
-    bottom: 6px;
-    left: 6px;
-    font-weight: bold;
-    color: $dark-purple;
-    background-color: white;
-    padding: 4px;
   }
+  
+  // p {
+  //   position: absolute;
+  //   margin: 0;
+  //   bottom: -16px;
+  //   left: 50%;
+  //   transform : translateX(-50%);
+  //   width: 200px;
+  //   white-space :nowrap;
+  //   overflow: hidden;
+  //   text-overflow: ellipsis;
+  //   font-weight: bold;
+  //   color: $dark-purple;
+  //   background-color: white;
+  //   padding: 4px;
+  // }
+
 }

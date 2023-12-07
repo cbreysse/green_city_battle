@@ -1,7 +1,8 @@
 <div data-controller="overlay">
   <div class="container mt-4">
     <div class="text-center mt-4 p-3 align-items-center justify-content-center">
-      <h2> Mes spots favoris </h2>
+      <h2> Mes favoris </h2>
+      <%= image_tag('love.png', alt: 'mes favoris', class:'lovepixel') %>
     </div>
     <%= render "shared/divider" %>
       <% if @favorite_spots.present? %>

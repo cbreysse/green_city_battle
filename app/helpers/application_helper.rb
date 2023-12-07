@@ -30,4 +30,8 @@ module ApplicationHelper
 
     nil
   end
+
+  def dry?(spot)
+    plant_dry?(spot)
+  end
 end
