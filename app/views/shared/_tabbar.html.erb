@@ -15,9 +15,13 @@
       <%end %>
     <% end %>
     <%= render "shared/plus_btn" %>
-    <% team_link = user_signed_in? ? team_path(current_user.team) : new_user_session_path %>
+    <% if user_signed_in? %>
+      <% team_link = team_path(current_user.team) %>
+    <% else %>
+      <% team_link = new_user_session_path %>
+    <% end %>
     <%= link_to team_link do %>
-      <% if current_page?(team_path(current_user.team)) %>
+      <% if user_signed_in? && current_page?(team_path(current_user.team)) %>
         <%= image_tag('user_group_full.svg', alt: 'Team Icon', class: 'rem-icon-size') %>
       <% else %>
         <%= image_tag('user-group.svg', alt: 'Team Icon', class: 'rem-icon-size') %>
