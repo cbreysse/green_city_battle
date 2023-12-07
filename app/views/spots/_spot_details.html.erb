@@ -10,9 +10,9 @@
       </div>
     </div>
     <% if spot.photo.attached? %>
-      <%= cl_image_tag spot.photo.key, height: 160, class: "spot-img" %>
+      <%= cl_image_tag spot.photo.key, height: 250, class: "spot-img" %>
     <% else %>
-      <%= image_tag "spot_default.jpeg", width: "120%", height: 160 %>
+      <%= image_tag "spot_default.jpeg", width: "120%", height: 250 %>
     <% end %>
     <%= render "spot_actions" %>
     <%= render "participations_history" %>
