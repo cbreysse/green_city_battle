@@ -5,7 +5,7 @@
     </div>
     <%= render "shared/divider" %>
       <% if @favorite_spots.present? %>
-        <div class="d-flex flex-column gap-4">
+        <div class="d-flex flex-column gap-5 mt-5">
           <% @favorite_spots.each do |spot| %>
             <%= render "favorite", spot: spot %>
           <% end %>

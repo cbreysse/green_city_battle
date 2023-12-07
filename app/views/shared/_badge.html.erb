@@ -1,6 +1,8 @@
-<div class="d-flex flex-column justify-content-center align-items-center <%= custom_class ||= ""%>">
+<div class="d-flex flex-column justify-content-center align-items-center h-100 <%= custom_class ||= ""%>">
   <div class="badge <%= badge_class ||= ""%>" style="<%= size ||= ""%>">
     <%= image_tag badge_img, width: "80%", height: "80%" %>
   </div>
-  <p><%= badge_text %></p>
+  <% if badge_text.present? %>
+    <p><%= badge_text %></p>
+  <% end %>
 </div>
