@@ -1,7 +1,8 @@
 <div class="container mt-4">
   <div class="text-center mt-4 p-3 align-items-center justify-content-center">
-    <h2><%= @event_type.name %> </h2>
     <h5><%= @event.spot.team.name %></h5>
+    <h1><%= @event_type.name %> </h1>
+    <p><%= @event_type.rules %></p>
       <div class="mt-4">
         <% if @current_user_is_participating %>
           Bravo tu es inscrit à cet event!
