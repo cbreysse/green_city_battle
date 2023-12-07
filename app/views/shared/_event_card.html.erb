@@ -1,8 +1,8 @@
 <%= link_to event_path(event) do  %>
   <div class="pixel-border d-flex justify-content-between align-items-center p-3 mb-5">
     <div class="d-flex flex-column justify-content-center align-items-start">
-      <p><strong><%= event.event_type.name %></strong></p>
-      <p class="mb-0" style="font-size: .75rem;"><%= event.occurs_at.strftime("le %d.%m à %Hh%M") %></p>
+      <h6><%= event.event_type.name %></h6>
+      <p class="mb-0"><%= event.occurs_at.strftime("le %d.%m à %Hh%M") %></p>
     </div>
     <% case event.event_type.name %>
     <% when "Nouvelle Oasis" %>
