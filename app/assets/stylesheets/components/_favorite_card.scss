@@ -2,19 +2,47 @@
   display: flex;
   flex-direction: column;
   gap: .5rem;
-  padding: 0.2rem 0.8rem;
   margin: 0 2rem;
-  margin-bottom: .5rem;
+  margin-bottom: 2rem;
+  margin-top:1rem;
+  border: 4px solid white;
 
   .favorite-card-img {
     position: relative;
-    object-fit: cover;
+    // flex-direction: column;
+    img{
+      object-fit: cover;
+      width: 100%;
+    }
   }
   .picto-dry-or-not{
-    display: flex;
+    position: absolute;
+    height: 40px;
+    bottom: calc(-43px / 2);
+    left: 50%;
+    transform: translateX(-50%);
 
+    div{
+      background-color: white;
+      color: black;
+      padding: 4px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      gap: 4px;
+    }
+
+    img{
+      object-fit: cover;
+      width: auto;
+    }
+
+    p {
+      margin: 0;
+    }
   }
-  
+
   // p {
   //   position: absolute;
   //   margin: 0;

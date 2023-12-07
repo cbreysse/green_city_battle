@@ -28,7 +28,7 @@ class FavoriteSpotsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to @spot, notice: 'Spot ajouté aux favoris!' }
       format.json do
-        render json: { heart_html: render_to_string(partial: "spots/heart", locals: { spot: @favorite_spot.spot }, formats: :html) }
+        render json: { heart_html: render_to_string(partial: "spots/heart", locals: { spot: @favorite_spot.spot }, formats: :html)}
       end
     end
   end
