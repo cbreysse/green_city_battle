@@ -5,7 +5,7 @@ class Event < ApplicationRecord
   has_many :users, through: :participations
 
   def formatted_date
-    date_time = self.created_at
+    date_time = self.occurs_at
     date_time.strftime("%e %B %Y")
   end
 end
