@@ -1,18 +1,34 @@
 <div class="navbar position-fixed bottom-0 w-100 z-3 navbar-expand-sm navbar-dark navbar-lewagon">
   <div class="container-fluid mx-3">
     <%= link_to root_path do %>
-      <%= image_tag('map.svg', alt: 'Map Icon', class: ['rem-icon-size', (current_page?(root_path) ? 'active-icon' : '')]) %>
+      <% if current_page?(root_path) %>
+        <%= image_tag('map_full.svg', alt: 'Map Icon', class: 'rem-icon-size') %>
+      <% else %>
+        <%= image_tag('map.svg', alt: 'Map Icon', class: 'rem-icon-size') %>
+      <% end %>
     <% end %>
     <%= link_to favorite_spots_path do %>
-      <%= image_tag('heart.svg', alt: 'Favorites Icon', class: 'rem-icon-size') %>
+      <% if current_page?(favorite_spots_path) %>
+        <%= image_tag('heart_full.svg', alt: 'Map Icon', class: 'rem-icon-size') %>
+      <% else %>
+        <%= image_tag('heart.svg', alt: 'Favorites Icon', class: 'rem-icon-size') %>
+      <%end %>
     <% end %>
     <%= render "shared/plus_btn" %>
     <% team_link = user_signed_in? ? team_path(current_user.team) : new_user_session_path %>
     <%= link_to team_link do %>
-      <%= image_tag('user-group.svg', alt: 'Team Icon', class: 'rem-icon-size') %>
+      <% if current_page?(team_path) %>
+        <%= image_tag('user_group_full.svg', alt: 'Team Icon', class: 'rem-icon-size') %>
+      <% else %>
+        <%= image_tag('user-group.svg', alt: 'Team Icon', class: 'rem-icon-size') %>
+      <% end %>
     <% end %>
     <%= link_to info_path do %>
-      <%= image_tag('question.svg', alt: 'Info Icon', class: 'rem-icon-size') %>
+      <% if current_page?(info_path) %>
+        <%= image_tag('question_full.svg', alt: 'Info Icon', class: 'rem-icon-size') %>
+      <% else %>
+        <%= image_tag('question.svg', alt: 'Info Icon', class: 'rem-icon-size') %>
+      <% end %>
     <% end %>
   </div>
 </div>
