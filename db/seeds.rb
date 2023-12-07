@@ -209,9 +209,9 @@ puts "Participations created!"
 
 puts "Creating events..."
 
-event_type1 = EventType.create!(name: "Nouvelle Oasis", points: 100)
-event_type2 = EventType.create!(name: "Green Bombing", points: 200)
-event_type3 = EventType.create!(name: "Green Raid", points: 300)
+event_type1 = EventType.create!(name: "Nouvelle Oasis", points: 100, rules: "Déclenchez la création d’un nouveau spot")
+event_type2 = EventType.create!(name: "Green Bombing", points: 200, rules: "rassemblez une équipe et préparez le nouveau spot pour la plantation (création de bac, mise en terre, engrais, préparation du terrain, plantation)")
+event_type3 = EventType.create!(name: "Green Raid", points: 300, rules: "Rassemblez 15 joueurs pour effectuer au moins une action chacun en entretenant ou en arrosant votre quartier")
 
 event_types = [event_type1, event_type2, event_type3]
 
