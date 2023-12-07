@@ -266,4 +266,30 @@ Spot.all.each do |spot|
   end
 end
 
+def calculate_total_points(participations)
+  mapped_participations = participations.map do |p|
+    p.action_type.nil? ? p.event.event_type.points : p.action_type.points
+  end
+  mapped_participations.sum
+end
+
+def calculate_total_points_by_team(participations)
+  participations.group_by { |p| p.spot.team }.transform_values do |team_participations|
+    calculate_total_points(team_participations)
+  end
+end
+
+loop do
+  puts "Reworking points for demo..."
+
+  all_teams_participations = Participation.joins(:spot).where(spots: { team: Team.all })
+  total_points_by_team = calculate_total_points_by_team(all_teams_participations).sort_by { |_team, points| points }.reverse.to_h
+  break if total_points_by_team.keys[1].name == "Team Lyon 1" && total_points_by_team.values.first - total_points_by_team.values[1] <= 20 && total_points_by_team.values.first - total_points_by_team.values[1] != 0
+
+  total_points_by_team.keys.first.participations.last.destroy
+end
+
+all_teams_participations = Participation.joins(:spot).where(spots: { team: Team.all })
+p total_points_by_team = calculate_total_points_by_team(all_teams_participations).sort_by { |_team, points| points }.reverse.to_h.map { |team, points| [team.name, points] }.to_h
+
 puts "Finished!"
