@@ -3,8 +3,8 @@
     <%= link_to root_path do %>
       <%= image_tag('map.svg', alt: 'Map Icon', class: ['rem-icon-size', (current_page?(root_path) ? 'active-icon' : '')]) %>
     <% end %>
-    <%= link_to "/" do %>
-      <%= image_tag('heart.svg', alt: 'Favorites Icon', class: ['rem-icon-size', (current_page?(root_path) ? 'active-icon' : '')]) %>
+    <%= link_to favorite_spots_path do %>
+      <%= image_tag('heart.svg', alt: 'Favorites Icon', class: 'rem-icon-size') %>
     <% end %>
     <%= render "shared/plus_btn" %>
     <% team_link = user_signed_in? ? team_path(current_user.team) : new_user_session_path %>

@@ -7,4 +7,6 @@ class User < ApplicationRecord
   belongs_to :team
   has_many :participations
   has_many :events, through: :participations
+  has_many :favorite_spots
+  has_many :spots, through: :favorite_spots
 end
