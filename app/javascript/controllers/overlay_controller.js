@@ -5,7 +5,6 @@ export default class extends Controller {
   static targets = ["spotDetails", "spotDetailsContent"]
 
   showSpotDetails(event) {
-    console.log("click")
     const { id } = event.currentTarget.dataset
     fetch(`/spots/${id}`, {
       headers: {

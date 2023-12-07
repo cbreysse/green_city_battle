@@ -127,7 +127,7 @@ export default class extends Controller {
           .addTo(this.map)
         const bounds = new mapboxgl.LngLatBounds()
         bounds.extend([ data.coords.longitude, data.coords.latitude ])
-        this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 700 })
+        this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 1500 })
   }
 
   #handleGeolocError = (error) => {
