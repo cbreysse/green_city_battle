@@ -12,6 +12,7 @@
     // flex-direction: column;
     img{
       object-fit: cover;
+      width: 100%;
     }
   }
   .picto-dry-or-not{
@@ -20,7 +21,7 @@
     bottom: calc(-43px / 2);
     left: 50%;
     transform: translateX(-50%);
-    
+
     div{
       background-color: white;
       color: black;
@@ -30,6 +31,11 @@
       justify-content: center;
       width: fit-content;
       gap: 4px;
+    }
+
+    img{
+      object-fit: cover;
+      width: auto;
     }
 
     p {
