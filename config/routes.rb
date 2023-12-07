@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   resources :spots, only: %i[index show new create] do
     resources :participations, only: %i[new create]
     resources :events, only: [:create]
+    resources :favorite_spots, only: %i[create]
   end
+
+  resources :favorite_spots, only: %i[index destroy]
+
   resources :participations, only: [:show]
   resources :events, only: [:show]
   resources :teams, only: [:show]
