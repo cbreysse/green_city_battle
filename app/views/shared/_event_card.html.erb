@@ -6,14 +6,14 @@
     </div>
     <% case event.event_type.name %>
     <% when "Nouvelle Oasis" %>
-      <% img = "planting.png" %>
+      <% img = "loading.png" %>
     <% when "Green Bombimg" %>
-      <% img = "plant.png" %>
+      <% img = "bomb.png" %>
     <% when "Green Raid" %>
-      <% img = "plant_watering.png" %>
+      <% img = "person.png" %>
     <% else %>
-      <% img = "planting.png" %>
+      <% img = "loading.png" %>
     <% end %>
-    <%= render "shared/badge", badge_img: img, badge_text: "", size: "width: 60px; height: 60px;" %>
+    <%= render "shared/badge", badge_img: img, badge_text: "", size: "width: 65px; height: 60px;" %>
   </div>
 <% end %>
