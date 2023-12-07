@@ -5,7 +5,7 @@
         <div class="d-flex justify-content-between gap-2">
           <p><%= team[1] %> pts</p>
           <p>
-            <% if i == 0 %>
+            <% if i == 0 || team[0] == current_user.team %>
             <span class="green-upward-triangle">&#9650;</span>
           <% elsif i == teams.length - 1 %>
             <span class="red-downward-triangle">&#9660;</span>
