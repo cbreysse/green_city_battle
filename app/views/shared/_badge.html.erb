@@ -4,11 +4,12 @@
   </div>
   <% timer ||= false %>
   <p><%= badge_text %></p>
-  <% show = !plus_btn ||= true  %>
-  <p
-    data-timer-spot-id-value="<%= spot_id  ||= ""%>"
-    data-timer-action-id-value="<%= action_id ||= ""%>"
-    data-timer-action-name-value="<%= action_name ||= ""%>"
-    data-controller="<%= timer ? "timer" : "" %>"
-  ></p>
+  <% if controller_name.include? "spots"  %>
+    <p
+      data-timer-spot-id-value="<%= spot_id  ||= ""%>"
+      data-timer-action-id-value="<%= action_id ||= ""%>"
+      data-timer-action-name-value="<%= action_name ||= ""%>"
+      data-controller="<%= timer ? "timer" : "" %>"
+    ></p>
+  <% end %>
 </div>
