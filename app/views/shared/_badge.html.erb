@@ -2,5 +2,12 @@
   <div class="badge <%= badge_class ||= ""%>" style="<%= size ||= ""%>">
     <%= image_tag badge_img, width: "80%", height: "80%" %>
   </div>
+  <% timer ||= false %>
   <p><%= badge_text %></p>
+  <p
+    data-timer-spot-id-value="<%= spot_id  ||= ""%>"
+    data-timer-action-id-value="<%= action_id ||= ""%>"
+    data-timer-action-name-value="<%= action_name ||= ""%>"
+    data-controller="<%= timer ? "timer" : "" %>"
+  ></p>
 </div>
