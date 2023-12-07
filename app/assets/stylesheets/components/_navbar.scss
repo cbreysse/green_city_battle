@@ -1,6 +1,7 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background: #F7F0F5;
+  background-color: $dark-purple;
+  color: $light-beige;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -14,6 +15,10 @@
 .rem-icon-size {
   width: 2rem;
   height: 2rem;
+}
+
+.light-beige-icon {
+  color: #F7F0F5;
 }
 
 .square-btn {
